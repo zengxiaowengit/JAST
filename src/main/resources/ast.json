@@ -1,0 +1,105 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 47,
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "start": 0,
+      "end": 14,
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 4,
+          "end": 13,
+          "id": {
+            "type": "Identifier",
+            "start": 4,
+            "end": 8,
+            "name": "tips"
+          },
+          "init": {
+            "type": "ObjectExpression",
+            "start": 11,
+            "end": 13,
+            "properties": []
+          }
+        }
+      ],
+      "kind": "let"
+    },
+    {
+      "type": "ExpressionStatement",
+      "start": 15,
+      "end": 29,
+      "expression": {
+        "type": "AssignmentExpression",
+        "start": 15,
+        "end": 28,
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "start": 15,
+          "end": 24,
+          "object": {
+            "type": "Identifier",
+            "start": 15,
+            "end": 19,
+            "name": "tips"
+          },
+          "property": {
+            "type": "Identifier",
+            "start": 20,
+            "end": 24,
+            "name": "code"
+          },
+          "computed": false
+        },
+        "right": {
+          "type": "Literal",
+          "start": 27,
+          "end": 28,
+          "value": 0,
+          "raw": "0"
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "start": 30,
+      "end": 46,
+      "expression": {
+        "type": "AssignmentExpression",
+        "start": 30,
+        "end": 45,
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "start": 30,
+          "end": 38,
+          "object": {
+            "type": "Identifier",
+            "start": 30,
+            "end": 34,
+            "name": "tips"
+          },
+          "property": {
+            "type": "Identifier",
+            "start": 35,
+            "end": 38,
+            "name": "msg"
+          },
+          "computed": false
+        },
+        "right": {
+          "type": "Literal",
+          "start": 41,
+          "end": 45,
+          "value": "成功",
+          "raw": "'成功'"
+        }
+      }
+    }
+  ],
+  "sourceType": "module"
+}
