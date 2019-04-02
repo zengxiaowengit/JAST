@@ -1,6 +1,7 @@
 package org.qiuer;
 
 
+import org.qiuer.ast.Program;
 import org.qiuer.core.ASTParser;
 import org.qiuer.util.JsonUtil;
 
@@ -25,7 +26,7 @@ public class Main {
       sb.append(line);
     }
     Map<String, Object> json = JsonUtil.toMap(sb.toString());
-    Object parser = new ASTParser().parse(json);
+    Program program = ASTParser.parse(json);
 
     System.out.println("hello world.");
   }
