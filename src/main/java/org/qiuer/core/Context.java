@@ -20,7 +20,7 @@ public class Context {
   // 更新当前context的同时，查找这个变量在哪定义。
   // 找到作用域最小的那个更新。未找到，放在当前作用域。
   public Object update(String key, Object value) {
-    for (int i = context.size() - 1; i >= 0; i++){
+    for (int i = context.size() - 1; i >= 0; i--){
       Map<String, Object> map = context.get(i);
       if(map.containsKey(key)){
         return map.put(key, value);
