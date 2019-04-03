@@ -3,12 +3,17 @@ package org.qiuer;
 
 import org.qiuer.ast.Program;
 import org.qiuer.core.ASTParser;
+import org.qiuer.core.ASTRunner;
+import org.qiuer.exception.EReturn;
 import org.qiuer.util.JsonUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +23,7 @@ import java.util.Map;
  */
 public class Main {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, Exception {
     InputStream stream = ASTParser.class.getResourceAsStream("/ast.json");
     String encoding = "UTF-8";
     BufferedReader reader = new BufferedReader(new InputStreamReader(stream, encoding));
@@ -28,8 +33,13 @@ public class Main {
       sb.append(line);
     }
     Map<String, Object> json = JsonUtil.toMap(sb.toString());
-    Program program = ASTParser.parse(json);
 
-    System.out.println("hello world.");
+
+    Program program = ASTParser.parse(json);
+    List<HashMap<String,Object>> context = new ArrayList<>();
+    EReturn ret = ASTRunner.run(program);
+
+    System.out.println("=======================Return==========================");
+    System.out.println(JsonUtil.toJson(ret));
   }
 }

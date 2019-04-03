@@ -1,11 +1,15 @@
-package org.qiuer.ast;
+package org.qiuer.ast.function;
 
+import org.qiuer.ast.Identifier;
+import org.qiuer.ast.Node;
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.ast.pattern.Pattern;
+import org.qiuer.core.Context;
+import org.qiuer.exception.IException;
 
 import java.util.List;
 
-public class Function implements Node{
+public class Function implements Node {
   String type = "Function";
   Identifier id;
   List<Pattern> params;
@@ -14,4 +18,9 @@ public class Function implements Node{
   Node body; // BlockStatement || Expression
   boolean generator;
   boolean expression;
+
+  @Override
+  public Object run(Context context) throws IException {
+    return null;
+  }
 }

@@ -1,4 +1,4 @@
-package org.qiuer.ast;
+package org.qiuer.ast.assign;
 
 
 import org.qiuer.ast.statement.Statement;
