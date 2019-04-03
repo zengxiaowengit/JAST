@@ -5,7 +5,10 @@ import org.qiuer.ast.Program;
 import org.qiuer.core.ASTParser;
 import org.qiuer.util.JsonUtil;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 /**

@@ -5,19 +5,20 @@ import org.qiuer.ast.Program;
 import org.qiuer.util.JsonUtil;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
 public class ASTParser {
+  //反序列化的java类型映射。
   private static HashMap<String, Class> typeMapping = new HashMap<String, Class>();
-  private static URL classUrl = ASTParser.class.getResource("/");
+  private static URL classPathUrl = ASTParser.class.getResource("/");
+
+  private static String astPath = classPathUrl.getPath() + Node.class.getPackage().getName().replaceAll("\\.", "/");
+  private static String astPackage = Node.class.getPackage().getName();
 
   static {
-    String astPath = classUrl.getPath() + "org/qiuer/ast";
-    String packageName = "org.qiuer.ast";
-    getClasses(packageName, astPath, true, typeMapping);
+    getClasses(astPackage, astPath, true, typeMapping);
   }
 
   private static void getClasses(String packageName, String astPath, final boolean recursive, HashMap<String, Class> classes) {
@@ -25,22 +26,20 @@ public class ASTParser {
     if (!dir.exists() || !dir.isDirectory()) {
       return;
     }
-    File[] dirfiles = dir.listFiles(new FileFilter() {
-      public boolean accept(File file) {
-        return (recursive && file.isDirectory()) || (file.getName().endsWith(".class"));
-      }
-    });
-    for (File file : dirfiles) {
-      if (file.isDirectory()) {
-        getClasses(packageName + "." + file.getName(), file.getAbsolutePath(), recursive, classes);
-      } else {
-        String className = file.getName().substring(0, file.getName().length() - 6);
-        try {
-          //classes.add(Class.forName(packageName + '.' + className));
-          Class clazz = Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className);
-          classes.put(clazz.getSimpleName(), clazz);
-        } catch (ClassNotFoundException e) {
-          e.printStackTrace();
+    File[] files = dir.listFiles(file -> (recursive && file.isDirectory()) || (file.getName().endsWith(".class")));
+    if (files != null) {
+      for (File file : files) {
+        if (file.isDirectory()) {
+          getClasses(packageName + "." + file.getName(), file.getAbsolutePath(), recursive, classes);
+        } else {
+          String className = file.getName().substring(0, file.getName().length() - 6);
+          try {
+            //classes.add(Class.forName(packageName + '.' + className));
+            Class clazz = Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className);
+            classes.put(clazz.getSimpleName(), clazz);
+          } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+          }
         }
       }
     }
@@ -69,6 +68,9 @@ public class ASTParser {
       return null;
     }
     Class<?> clazz = typeMapping.get(type);
+    if(clazz == null){
+      throw new RuntimeException("没有为" + type + "找到对应的支持的序列化类型");
+    }
     List<Field> fields = new ArrayList<>();
 //    fields.addAll(Arrays.asList(clazz.getFields())); 这个是父类的字段。interface 字段是final，不能设值。
     fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
@@ -105,7 +107,7 @@ public class ASTParser {
           try {
             field.set(finalNode, element);
           } catch (IllegalAccessException e) {
-            System.out.println("类型：" + type + "，字段：" + key);
+            System.out.println("为类型：" + type + "的字段：" + key + "设置为: " +  JsonUtil.toJson(element) + "报错");
             e.printStackTrace();
           }
         }
