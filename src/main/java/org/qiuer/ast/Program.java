@@ -15,7 +15,7 @@ public class Program implements Node {
   protected List<Statement> body;
 
   @Override
-  public Object run(Context context) throws EReturn, EReturnJson {
+  public Object run(Context context) throws EReturn {
     try {
       context.enterBlock();
       for (Statement statement : body){

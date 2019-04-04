@@ -1,10 +1,16 @@
 package org.qiuer.ast.expression;
 
 
+import org.qiuer.ast.Property;
 import org.qiuer.core.Context;
+import org.qiuer.exception.Const;
+import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.IException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArrayExpression implements Expression {
   String type = "ArrayExpression";
@@ -12,6 +18,11 @@ public class ArrayExpression implements Expression {
 
   @Override
   public Object run(Context context) throws IException {
-    return null;
+    List<Object> list = new ArrayList<>();
+    for (Expression expression: elements) {
+      list.add(expression.run(context));
+    }
+    return list;
   }
+
 }

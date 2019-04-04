@@ -11,6 +11,6 @@ public class ExpressionStatement implements Statement {
 
   @Override
   public Object run(Context context) throws IException {
-    return null;
+    return expression.run(context);
   }
 }

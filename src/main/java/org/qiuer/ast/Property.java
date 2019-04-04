@@ -5,12 +5,12 @@ import org.qiuer.core.Context;
 import org.qiuer.exception.IException;
 
 public class Property implements Node {
-  String type = "Property";
+  public String type = "Property";
   //  Literal | Identifier
-  Expression key;
-  Expression value;
+  public Expression key;
+  public Expression value;
   // init | get | set
-  String kind;
+  public String kind;
 
   @Override
   public Object run(Context context) throws IException {

@@ -3,7 +3,7 @@
  */
 package org.qiuer.ast.assign;
 
-import org.qiuer.ast.Identifier;
+import org.qiuer.ast.expression.Identifier;
 import org.qiuer.ast.Node;
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.ast.pattern.Pattern;
@@ -20,9 +20,9 @@ public class VariableDeclarator implements Node {
     @Override
     public Object run(Context context) throws IException {
       if(id instanceof Identifier){
-        context.update(((Identifier)id).name, init.run(context));
+        context.declare(((Identifier)id).name, init.run(context), "let");
       }else {
-        throw new ERuntime(Const.EXCEPTION.FRAME.UN_SUPPORTED_EXPRESSION, "不支持的表达式：" + type);
+        throw new ERuntime(Const.EXCEPTION.FRAME.UNSUPPORTED_EXPRESSION, "不支持的表达式：" + type);
       }
       return null;
     }

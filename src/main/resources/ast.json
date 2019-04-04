@@ -1,17 +1,17 @@
 {
   "type": "Program",
   "start": 0,
-  "end": 47,
+  "end": 129,
   "body": [
     {
       "type": "VariableDeclaration",
       "start": 0,
-      "end": 14,
+      "end": 29,
       "declarations": [
         {
           "type": "VariableDeclarator",
           "start": 4,
-          "end": 13,
+          "end": 28,
           "id": {
             "type": "Identifier",
             "start": 4,
@@ -21,8 +21,45 @@
           "init": {
             "type": "ObjectExpression",
             "start": 11,
-            "end": 13,
-            "properties": []
+            "end": 28,
+            "properties": [
+              {
+                "type": "Property",
+                "start": 12,
+                "end": 27,
+                "method": false,
+                "shorthand": false,
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 12,
+                  "end": 16,
+                  "name": "data"
+                },
+                "value": {
+                  "type": "ArrayExpression",
+                  "start": 17,
+                  "end": 27,
+                  "elements": [
+                    {
+                      "type": "Literal",
+                      "start": 18,
+                      "end": 21,
+                      "value": 100,
+                      "raw": "100"
+                    },
+                    {
+                      "type": "Literal",
+                      "start": 23,
+                      "end": 26,
+                      "value": 101,
+                      "raw": "101"
+                    }
+                  ]
+                },
+                "kind": "init"
+              }
+            ]
           }
         }
       ],
@@ -30,53 +67,17 @@
     },
     {
       "type": "ExpressionStatement",
-      "start": 15,
-      "end": 29,
-      "expression": {
-        "type": "AssignmentExpression",
-        "start": 15,
-        "end": 28,
-        "operator": "=",
-        "left": {
-          "type": "MemberExpression",
-          "start": 15,
-          "end": 24,
-          "object": {
-            "type": "Identifier",
-            "start": 15,
-            "end": 19,
-            "name": "tips"
-          },
-          "property": {
-            "type": "Identifier",
-            "start": 20,
-            "end": 24,
-            "name": "code"
-          },
-          "computed": false
-        },
-        "right": {
-          "type": "Literal",
-          "start": 27,
-          "end": 28,
-          "value": 0,
-          "raw": "0"
-        }
-      }
-    },
-    {
-      "type": "ExpressionStatement",
       "start": 30,
-      "end": 46,
+      "end": 44,
       "expression": {
         "type": "AssignmentExpression",
         "start": 30,
-        "end": 45,
+        "end": 43,
         "operator": "=",
         "left": {
           "type": "MemberExpression",
           "start": 30,
-          "end": 38,
+          "end": 39,
           "object": {
             "type": "Identifier",
             "start": 30,
@@ -86,17 +87,124 @@
           "property": {
             "type": "Identifier",
             "start": 35,
-            "end": 38,
-            "name": "msg"
+            "end": 39,
+            "name": "code"
           },
           "computed": false
         },
         "right": {
           "type": "Literal",
-          "start": 41,
-          "end": 45,
-          "value": "成功",
-          "raw": "'成功'"
+          "start": 42,
+          "end": 43,
+          "value": 0,
+          "raw": "0"
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "start": 45,
+      "end": 66,
+      "expression": {
+        "type": "AssignmentExpression",
+        "start": 45,
+        "end": 65,
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "start": 45,
+          "end": 53,
+          "object": {
+            "type": "Identifier",
+            "start": 45,
+            "end": 49,
+            "name": "tips"
+          },
+          "property": {
+            "type": "Identifier",
+            "start": 50,
+            "end": 53,
+            "name": "msg"
+          },
+          "computed": false
+        },
+        "right": {
+          "type": "MemberExpression",
+          "start": 56,
+          "end": 65,
+          "object": {
+            "type": "Identifier",
+            "start": 56,
+            "end": 60,
+            "name": "tips"
+          },
+          "property": {
+            "type": "Identifier",
+            "start": 61,
+            "end": 65,
+            "name": "data"
+          },
+          "computed": false
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "start": 67,
+      "end": 93,
+      "expression": {
+        "type": "AssignmentExpression",
+        "start": 67,
+        "end": 92,
+        "operator": "=",
+        "left": {
+          "type": "MemberExpression",
+          "start": 67,
+          "end": 77,
+          "object": {
+            "type": "Identifier",
+            "start": 67,
+            "end": 71,
+            "name": "tips"
+          },
+          "property": {
+            "type": "Identifier",
+            "start": 72,
+            "end": 77,
+            "name": "data1"
+          },
+          "computed": false
+        },
+        "right": {
+          "type": "MemberExpression",
+          "start": 80,
+          "end": 92,
+          "object": {
+            "type": "MemberExpression",
+            "start": 80,
+            "end": 89,
+            "object": {
+              "type": "Identifier",
+              "start": 80,
+              "end": 84,
+              "name": "tips"
+            },
+            "property": {
+              "type": "Identifier",
+              "start": 85,
+              "end": 89,
+              "name": "data"
+            },
+            "computed": false
+          },
+          "property": {
+            "type": "Literal",
+            "start": 90,
+            "end": 91,
+            "value": 0,
+            "raw": "0"
+          },
+          "computed": true
         }
       }
     }

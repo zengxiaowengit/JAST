@@ -9,7 +9,10 @@ public interface Const {
 
     interface FRAME{
       //不支持的表达式和声明
-      int UN_SUPPORTED_EXPRESSION = 100;
+      int UNSUPPORTED_EXPRESSION = 100;
+
+      //不支持的操作
+      int UNSUPPORTED_OPERATION = 100;
 
       //未识别的标识符
       int UNKNOWN_IDENTIFIER = 200;

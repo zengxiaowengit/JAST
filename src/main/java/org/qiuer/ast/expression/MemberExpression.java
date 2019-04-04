@@ -3,15 +3,27 @@ package org.qiuer.ast.expression;
 import org.qiuer.core.Context;
 import org.qiuer.exception.IException;
 
-public class MemberExpression implements Expression{
+import java.util.ArrayList;
+import java.util.List;
+
+public class MemberExpression extends AbstractAssignPathExpression implements Expression{
   String type = "MemberExpression";
-  Expression object;
+  AbstractAssignPathExpression object;
   // Identifier | Expression
-  Expression property;
+  AbstractAssignPathExpression property;
   boolean computed;
 
   @Override
   public Object run(Context context) throws IException {
-    return null;
+    List<Object> path = new ArrayList<>();
+    object.addMemberPath(path);
+    property.addMemberPath(path);
+    return object.getValue(context, path);
+  }
+
+  @Override
+  public void addMemberPath(List<Object> path) throws IException {
+      object.addMemberPath(path);
+      property.addMemberPath(path);
   }
 }

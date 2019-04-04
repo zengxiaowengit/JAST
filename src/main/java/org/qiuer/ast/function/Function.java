@@ -1,6 +1,6 @@
 package org.qiuer.ast.function;
 
-import org.qiuer.ast.Identifier;
+import org.qiuer.ast.expression.Identifier;
 import org.qiuer.ast.Node;
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.ast.pattern.Pattern;
