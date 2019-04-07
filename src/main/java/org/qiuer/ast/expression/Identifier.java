@@ -1,6 +1,5 @@
 package org.qiuer.ast.expression;
 
-import org.qiuer.ast.expression.Expression;
 import org.qiuer.ast.pattern.Pattern;
 import org.qiuer.core.Context;
 import org.qiuer.exception.IException;

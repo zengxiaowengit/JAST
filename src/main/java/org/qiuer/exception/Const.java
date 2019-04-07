@@ -18,7 +18,8 @@ public interface Const {
       int UNKNOWN_IDENTIFIER = 200;
       // 未定义变量
       int UNDEFINED_VARIABLE = 201;
-
+      // 变量不能修改
+      int VARIABLE_CANNOT_MODIFIED = 202;
     }
   }
 }

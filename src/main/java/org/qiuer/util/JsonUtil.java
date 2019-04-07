@@ -20,6 +20,15 @@ public class JsonUtil {
         return null;
     }
 
+    public static String toPrettyJson(Object object){
+        try {
+            return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static Map<String, Object> toMap(String json){
         try {
             return objectMapper.readValue(json, HashMap.class);

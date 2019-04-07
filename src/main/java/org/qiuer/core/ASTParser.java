@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * json转化为抽象语法树（Abstract Syntax Tree）
+ */
 public class ASTParser {
   //反序列化的java类型映射。
   private static HashMap<String, Class> typeMapping = new HashMap<String, Class>();
