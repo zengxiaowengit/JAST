@@ -1,16 +1,11 @@
-package org.qiuer.ast.pattern;
+package org.qiuer.ast;
 
-
-import org.qiuer.ast.Node;
 import org.qiuer.core.Context;
 import org.qiuer.exception.IException;
 
-import java.util.List;
-
-public class ArrayPattern extends Pattern {
-  String type = "ArrayPattern";
-  //[ Pattern | null ];
-  List<Node> elements;
+public class File extends Node {
+  public String type = "File";
+  public Program program;
 
   @Override
   public void compile() throws IException {

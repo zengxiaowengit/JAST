@@ -1,7 +1,9 @@
 package org.qiuer.core;
 
 /**
- * Member 主要用来存放数组、map的成员函数。
+ * 用来存放函数。
+ * 主要两类：
+ * 代码里自定义函数和框架内置函数。
  */
 public class FunctionContext extends AbstractRuntimeContext<String, Object> {
 

@@ -2,5 +2,5 @@ package org.qiuer.ast.statement;
 
 import org.qiuer.ast.Node;
 
-public interface Statement extends Node {
+public abstract class Statement extends Node implements IStatement{
 }

@@ -5,8 +5,13 @@ import org.qiuer.exception.IException;
 
 import java.util.List;
 
-public class ThisExpression extends AbstractAssignPathExpression implements Expression{
+public class ThisExpression extends AbstractAssignPathExpression{
   String type = "ThisExpression";
+
+  @Override
+  public void compile() throws IException {
+
+  }
 
   @Override
   public Object run(Context context) throws IException {

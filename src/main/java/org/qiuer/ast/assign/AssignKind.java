@@ -14,7 +14,7 @@ public enum AssignKind {
       case "let": return LET;
       case "var": return VAR;
       case "const": return CONST;
-      default:throw new ERuntime(Const.EXCEPTION.FRAME.UNKNOWN_IDENTIFIER, "未识别的标识符:" + str);
+      default:throw new ERuntime(Const.EXCEPTION.UNKNOWN_IDENTIFIER, "未识别的标识符:" + str);
     }
   }
 }

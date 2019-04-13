@@ -6,12 +6,17 @@ import org.qiuer.exception.IException;
 
 import java.util.List;
 
-public class VariableDeclaration implements Declaration {
+public class VariableDeclaration extends Declaration {
 
     String type = "VariableDeclaration";
     List<VariableDeclarator> declarations;
     // "var" | "let" | "const";
     String kind;
+
+    @Override
+    public void compile() throws IException {
+
+    }
 
     @Override
     public Object run(Context context) throws IException {

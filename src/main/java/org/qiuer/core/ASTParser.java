@@ -1,5 +1,6 @@
 package org.qiuer.core;
 
+import org.qiuer.ast.INode;
 import org.qiuer.ast.Node;
 import org.qiuer.ast.Program;
 import org.qiuer.util.JsonUtil;
@@ -50,7 +51,7 @@ public class ASTParser {
 
   public static Program parse(Map<String, Object> tree) {
     Object ret = generate(tree);
-    return (Program) ret;
+    return ((org.qiuer.ast.File) ret).program;
   }
 
   /**
@@ -67,27 +68,29 @@ public class ASTParser {
     String type = tree.get("type").toString();
     System.out.println(type);
     if (type == null) {
-      System.out.println("没有type的节点：" + JsonUtil.toJson(tree));
+      System.out.println("没有type字段的节点：" + JsonUtil.toJson(tree));
       return null;
     }
     Class<?> clazz = typeMapping.get(type);
     if(clazz == null){
-      throw new RuntimeException("没有为" + type + "找到对应的支持的序列化类型");
+      throw new RuntimeException("不支持的type:" + type);
     }
     List<Field> fields = new ArrayList<>();
-//    fields.addAll(Arrays.asList(clazz.getFields())); 这个是父类的字段。interface 字段是final，不能设值。
+    // 这个是父类的字段。interface 字段是final，不能设值。
+    fields.addAll(Arrays.asList(clazz.getFields()));
     fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
-    Node node = null;
+    INode node = null;
 
     try {
-      node = (Node) clazz.newInstance();
-      Node finalNode = node;
-      tree.forEach((key, value) -> {
-        //获取key 对应的field。
+      node = (INode) clazz.newInstance();
+      for (Map.Entry<String, Object> entry : tree.entrySet()) {
+        String key = entry.getKey();
+        Object value = entry.getValue();
+//获取key 对应的field。
         Field field = getField(fields, key);
         if (field == null) {
           System.out.println("未在类型" + type + "中找到字段：" + key);
-          return;
+          continue;
         }
         Object element = null;//设置到节点的值。
         if (value instanceof Map) {
@@ -95,7 +98,7 @@ public class ASTParser {
             element = generate((Map<String, Object>) value);
           }
         } else if (value instanceof List) {
-          element = new ArrayList<Object>();
+          element = new ArrayList<>();
           Object finalElement = element;
           ((List) value).forEach(item -> {
             ((ArrayList) finalElement).add(generate((Map<String, Object>) item));
@@ -108,14 +111,14 @@ public class ASTParser {
         field.setAccessible(true);
         if (null != element) {
           try {
-            field.set(finalNode, element);
+            field.set(node, element);
           } catch (IllegalAccessException e) {
-            System.out.println("为类型：" + type + "的字段：" + key + "设置为: " +  JsonUtil.toJson(element) + "报错");
+            System.out.println("为类型：" + type + "的字段：" + key + "设置为: " + JsonUtil.toJson(element) + "报错");
             e.printStackTrace();
           }
         }
-
-      });
+      }
+      node.compile();
     } catch (Exception e) {
       System.out.println("这个节点初始化错误：" + JsonUtil.toJson(tree));
       e.printStackTrace();

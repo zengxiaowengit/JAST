@@ -5,9 +5,14 @@ import org.qiuer.exception.IException;
 
 import java.util.List;
 
-public class BlockStatement implements Statement {
+public class BlockStatement extends Statement {
   String type = "BlockStatement";
   List<Statement> body;
+
+  @Override
+  public void compile() throws IException {
+
+  }
 
   @Override
   public Object run(Context context) throws IException {

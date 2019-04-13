@@ -3,6 +3,5 @@ package org.qiuer.ast.assign;
 
 import org.qiuer.ast.statement.Statement;
 
-public interface Declaration extends Statement {
-  String type = "Declaration";
+public abstract class Declaration extends Statement implements IDeclaration{
 }

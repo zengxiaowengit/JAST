@@ -1,16 +1,23 @@
 package org.qiuer.core;
 
+import org.qiuer.exception.ERuntime;
+
 import java.util.*;
 
 public abstract class AbstractRuntimeContext<String, V> implements IRuntimeContext<String, V> {
 
-  protected List<HashMap<String, Object>> context = new ArrayList<>();
+  protected List<HashMap<String, V>> context = new ArrayList<>();
+
+  @Override
+  public void create(String key, V value) throws ERuntime {
+    context.get(context.size() - 1).put(key, value);
+  }
 
   @Override
   public Object update(String key, V value) {
     int size = context.size();
     for (int i = size - 1; i >= 0; i--){
-      Map<String, Object> map = context.get(i);
+      Map<String, V> map = context.get(i);
       if(map.containsKey(key)){
         return map.put(key, value);
       }
@@ -19,9 +26,9 @@ public abstract class AbstractRuntimeContext<String, V> implements IRuntimeConte
   }
 
   @Override
-  public Object get(String key) {
+  public V get(String key) {
     for (int i = context.size() - 1; i >= 0; i--){
-      Map<String, Object> map = context.get(i);
+      Map<String, V> map = context.get(i);
       if(map.containsKey(key)){
         return map.get(key);
       }
@@ -43,7 +50,7 @@ public abstract class AbstractRuntimeContext<String, V> implements IRuntimeConte
   @Override
   public Map<String, V> getCurrentContext(){
     HashMap<String, Object>  currentContext = new HashMap<>();
-    for (HashMap<String, Object> map : context) {
+    for (HashMap<String, V> map : context) {
       currentContext.putAll(map);
     }
     return (Map<String, V>) Collections.unmodifiableMap(currentContext);

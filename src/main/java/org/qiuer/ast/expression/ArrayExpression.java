@@ -7,9 +7,14 @@ import org.qiuer.exception.IException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayExpression implements Expression {
+public class ArrayExpression extends Expression {
   String type = "ArrayExpression";
   List<Expression> elements;
+
+  @Override
+  public void compile() throws IException {
+
+  }
 
   @Override
   public Object run(Context context) throws IException {

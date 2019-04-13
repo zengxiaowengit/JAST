@@ -1,6 +1,6 @@
 package org.qiuer.ast.assign;
 
-import org.qiuer.ast.function.Function;
+import org.qiuer.ast.expression.function.Function;
 
-public class FunctionDeclaration extends Function implements Declaration {
+public class FunctionDeclaration extends Function implements IDeclaration {
 }

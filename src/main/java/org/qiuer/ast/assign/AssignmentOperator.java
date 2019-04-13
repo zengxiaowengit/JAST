@@ -29,7 +29,7 @@ public enum AssignmentOperator {
       case "%=": return MOD_EQUAL;
       case "<=": return LESS_EQUAL;
       case ">=": return GREAT_EQUAL;
-      default: throw new ERuntime(Const.EXCEPTION.FRAME.UNKNOWN_IDENTIFIER, "未识别的标识符:" + str);
+      default: throw new ERuntime(Const.EXCEPTION.UNKNOWN_IDENTIFIER, "未识别的标识符:" + str);
     }
   }
 }
