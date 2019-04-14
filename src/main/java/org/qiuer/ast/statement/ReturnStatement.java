@@ -1,16 +1,12 @@
-package org.qiuer.ast;
+package org.qiuer.ast.statement;
 
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.core.Context;
 import org.qiuer.exception.IException;
 
-public class Property extends Node {
-  public String type = "Property";
-  //  Literal | Identifier
-  public Expression key;
-  public Expression value;
-  // compile | getVariable | set
-  public String kind;
+public class ReturnStatement extends Statement {
+  public String type = "ReturnStatement";
+  public Expression argument;
 
   @Override
   public void compile() throws IException {
@@ -19,6 +15,8 @@ public class Property extends Node {
 
   @Override
   public Object run(Context context) throws IException {
-    return null;
+    if (argument == null)
+      return null;
+    return argument.run(context);
   }
 }

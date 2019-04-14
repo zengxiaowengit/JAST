@@ -1,6 +1,6 @@
 package org.qiuer.ast.expression;
 
-import org.qiuer.ast.Property;
+import org.qiuer.ast.ObjectProperty;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ObjectExpression extends Expression{
   public String type = "ObjectExpression";
-  public List<Property> properties;
+  public List<ObjectProperty> properties;
 
   @Override
   public void compile() throws IException {
@@ -22,7 +22,7 @@ public class ObjectExpression extends Expression{
   @Override
   public Object run(Context context) throws IException {
     Map<String, Object> map = new HashMap<>();
-    for (Property property : properties) {
+    for (ObjectProperty property : properties) {
       if(property.key instanceof Identifier){
         map.put(((Identifier) property.key).name, property.value.run(context));
       }else {

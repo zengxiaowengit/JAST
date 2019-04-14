@@ -1,5 +1,6 @@
 package org.qiuer.ast;
 
+import org.qiuer.ast.statement.IStatement;
 import org.qiuer.ast.statement.Statement;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class Program extends Node {
   protected String type = "Program";
-  protected List<Statement> body;
+  protected List<IStatement> body;
 
   @Override
   public void compile() throws IException {
@@ -22,10 +23,10 @@ public class Program extends Node {
   public Object run(Context context) throws EReturn {
     try {
       context.enterBlock();
-      for (Statement statement : body){
+      for (IStatement statement : body){
         statement.run(context);
       }
-      System.out.println(JsonUtil.toJson(context));
+      System.out.println(JsonUtil.toPrettyJson(context));
     } catch (IException e1) {
       throw new EReturn(e1.getCode(), e1.getMsg(), null);
     } catch (Exception e2) {

@@ -40,7 +40,8 @@ public class ASTParser {
           try {
             //classes.add(Class.forName(packageName + '.' + className));
             Class clazz = Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className);
-            classes.put(clazz.getSimpleName(), clazz);
+            if(INode.class.isAssignableFrom(clazz))
+              classes.put(clazz.getSimpleName(), clazz);
           } catch (ClassNotFoundException e) {
             e.printStackTrace();
           }
@@ -68,7 +69,7 @@ public class ASTParser {
     String type = tree.get("type").toString();
     System.out.println(type);
     if (type == null) {
-      System.out.println("没有type字段的节点：" + JsonUtil.toJson(tree));
+      System.out.println("没有type字段的节点：" + JsonUtil.toPrettyJson(tree));
       return null;
     }
     Class<?> clazz = typeMapping.get(type);
@@ -113,14 +114,14 @@ public class ASTParser {
           try {
             field.set(node, element);
           } catch (IllegalAccessException e) {
-            System.out.println("为类型：" + type + "的字段：" + key + "设置为: " + JsonUtil.toJson(element) + "报错");
+            System.out.println("为类型：" + type + "的字段：" + key + "设置为: " + JsonUtil.toPrettyJson(element) + "报错");
             e.printStackTrace();
           }
         }
       }
       node.compile();
     } catch (Exception e) {
-      System.out.println("这个节点初始化错误：" + JsonUtil.toJson(tree));
+      System.out.println("这个节点初始化错误：" + JsonUtil.toPrettyJson(tree));
       e.printStackTrace();
     }
     return node;

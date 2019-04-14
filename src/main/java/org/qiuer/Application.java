@@ -31,6 +31,6 @@ public class Application {
     EReturn ret = ASTRunner.run(program);
 
     System.out.println("=======================Return==========================");
-    System.out.println(JsonUtil.toJson(ret));
+    System.out.println(JsonUtil.toPrettyJson(ret));
   }
 }

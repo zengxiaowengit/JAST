@@ -1,13 +1,10 @@
 package org.qiuer.core;
 
 import org.qiuer.ast.expression.function.Function;
-import org.qiuer.ast.expression.function.array.ArrayPushFunction;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.IException;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,11 +14,7 @@ public class Context{
   private VariableContext variableContext = new VariableContext();
   private FunctionContext functionContext = new FunctionContext();
   private AssignContext assignContext = new AssignContext();
-  private static final HashMap<String, Class<? extends Function>> functionRegister = new HashMap<String, Class<? extends Function>>() {
-    {
-      put(ArrayPushFunction.getName(), ArrayPushFunction.class);
-    }
-  };
+
 
 
   public Object update(String key, Object value) throws ERuntime {
@@ -39,6 +32,10 @@ public class Context{
     return variableContext.get(key);
   }
 
+  public Function getFunction(Class clazz, String name) throws IException {
+    return functionContext.getFunction(clazz, name);
+  }
+
   public void enterBlock() {
     assignContext.enterBlock();
     variableContext.enterBlock();
@@ -49,23 +46,7 @@ public class Context{
     variableContext.exitBlock();
   }
 
-  public Function getFunction(Class clazz, String name) throws IException {
-    try {
-      if (List.class.isAssignableFrom(clazz)){
-        Function function = functionRegister.get(name).newInstance();
-        function.compile();
-        return function;
-      }else{
-        throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION,"框架暂不支持的函数：" + name);
-      }
-    }catch (IException e1){
-      throw e1;
-    }
-    catch (Exception e) {
-      e.printStackTrace();
-      throw new ERuntime(1, "框架暂不支持的函数：" + name);
-    }
-  }
+
 
   public Map<String, Object> getCurrentContext() {
     return variableContext.getCurrentContext();

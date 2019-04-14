@@ -22,7 +22,7 @@ public class JsonUtil {
 
     public static String toPrettyJson(Object object){
         try {
-            return objectMapper.writeValueAsString(object);
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
