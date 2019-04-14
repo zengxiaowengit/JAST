@@ -4,6 +4,10 @@ public class EReturn extends IException {
 
   private Object object;
 
+  public EReturn(Object object){
+    this.object = object;
+  }
+
   public EReturn(int code, String message) {
     super(code, message);
   }

@@ -39,8 +39,7 @@ public class CallExpression extends Expression {
         }
       }
       //调用函数
-      function.run(context);
-      return null;
+      return function.run(context);
     }catch (EReturn eReturn){
       return eReturn.getObject();
     }catch (IException e) {

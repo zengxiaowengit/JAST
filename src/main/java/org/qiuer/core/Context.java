@@ -36,14 +36,24 @@ public class Context{
     return functionContext.getFunction(clazz, name);
   }
 
+  public Function getFunction(String name) {
+    return functionContext.getFunction(name);
+  }
+
+  public void declareFunction(String key, Function value) {
+    functionContext.create(key, value);
+  }
+
   public void enterBlock() {
     assignContext.enterBlock();
     variableContext.enterBlock();
+    functionContext.enterBlock();
   }
 
   public void exitBlock() {
     assignContext.exitBlock();
     variableContext.exitBlock();
+    functionContext.exitBlock();
   }
 
 

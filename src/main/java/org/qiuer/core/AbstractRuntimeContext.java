@@ -1,7 +1,5 @@
 package org.qiuer.core;
 
-import org.qiuer.exception.ERuntime;
-
 import java.util.*;
 
 public abstract class AbstractRuntimeContext<String, V> implements IRuntimeContext<String, V> {
@@ -9,7 +7,7 @@ public abstract class AbstractRuntimeContext<String, V> implements IRuntimeConte
   protected List<HashMap<String, V>> context = new ArrayList<>();
 
   @Override
-  public void create(String key, V value) throws ERuntime {
+  public void create(String key, V value) {
     context.get(context.size() - 1).put(key, value);
   }
 

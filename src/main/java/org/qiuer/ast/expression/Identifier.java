@@ -23,8 +23,11 @@ public class Identifier extends AbstractAssignPathExpression{
 
   @Override
   public Object run(Context context) throws IException {
-    // TODO 这里不只有可能是变量值，还有可能是代码定义的函数。
-    return context.getVariableValue(name);
+    Object ret = context.getVariableValue(name);
+    if(ret == null){
+      ret = context.getFunction(name);
+    }
+    return ret;
   }
 
   @Override

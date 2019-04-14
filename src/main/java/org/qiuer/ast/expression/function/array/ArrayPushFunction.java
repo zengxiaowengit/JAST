@@ -1,6 +1,7 @@
 package org.qiuer.ast.expression.function.array;
 
 import org.qiuer.ast.expression.Identifier;
+import org.qiuer.ast.expression.function.CustomFunction;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * list.push(element)
  */
-public class ArrayPushFunction extends ArrayFunction {
+public class ArrayPushFunction extends CustomFunction {
   public String type = "ArrayPushFunction";
 
   @Override
@@ -37,8 +38,15 @@ public class ArrayPushFunction extends ArrayFunction {
     }
   }
 
-  public static String getName(){
+  @Override public String getName(){
     return "push";
   }
+
+  @Override
+  public Class registerTo() {
+    return List.class;
+  }
+
+  @Override public boolean allowPropCall() { return false; }
 
 }

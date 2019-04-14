@@ -8,6 +8,6 @@ public class ArrowFunctionExpression extends Function{
 
   @Override
   public Object run(Context context) throws IException {
-    return null;
+    return this.body.run(context);
   }
 }

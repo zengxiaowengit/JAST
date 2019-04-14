@@ -2,6 +2,7 @@ package org.qiuer.ast.statement;
 
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.core.Context;
+import org.qiuer.exception.EReturn;
 import org.qiuer.exception.IException;
 
 public class ReturnStatement extends Statement {
@@ -17,6 +18,6 @@ public class ReturnStatement extends Statement {
   public Object run(Context context) throws IException {
     if (argument == null)
       return null;
-    return argument.run(context);
+    throw new EReturn(argument.run(context));
   }
 }
