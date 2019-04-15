@@ -1,0 +1,12 @@
+{
+  "name": "AST",
+  "version": "1.0.0",
+  "main": "parse.js",
+  "repository": "https://wwww.zengxiaowen.top",
+  "author": "xiaoxiaowen",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-types": "^6.26.0"
+  }
+}
