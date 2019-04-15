@@ -1,13 +1,11 @@
 package org.qiuer.core;
 
 import org.qiuer.ast.INode;
-import org.qiuer.ast.Node;
 import org.qiuer.ast.Program;
 import org.qiuer.util.JsonUtil;
+import org.reflections.Reflections;
 
-import java.io.File;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.*;
 
 /**
@@ -16,37 +14,16 @@ import java.util.*;
 public class ASTParser {
   //反序列化的java类型映射。
   private static HashMap<String, Class> typeMapping = new HashMap<String, Class>();
-  private static URL classPathUrl = ASTParser.class.getResource("/");
-
-  private static String astPath = classPathUrl.getPath() + Node.class.getPackage().getName().replaceAll("\\.", "/");
-  private static String astPackage = Node.class.getPackage().getName();
 
   static {
-    getClasses(astPackage, astPath, true, typeMapping);
+    initTypeMapping();
   }
 
-  private static void getClasses(String packageName, String astPath, final boolean recursive, HashMap<String, Class> classes) {
-    File dir = new File(astPath);
-    if (!dir.exists() || !dir.isDirectory()) {
-      return;
-    }
-    File[] files = dir.listFiles(file -> (recursive && file.isDirectory()) || (file.getName().endsWith(".class")));
-    if (files != null) {
-      for (File file : files) {
-        if (file.isDirectory()) {
-          getClasses(packageName + "." + file.getName(), file.getAbsolutePath(), recursive, classes);
-        } else {
-          String className = file.getName().substring(0, file.getName().length() - 6);
-          try {
-            //classes.add(Class.forName(packageName + '.' + className));
-            Class clazz = Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className);
-            if(INode.class.isAssignableFrom(clazz))
-              classes.put(clazz.getSimpleName(), clazz);
-          } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-          }
-        }
-      }
+  private static void initTypeMapping() {
+    Reflections reflections = new Reflections(INode.class.getPackage().getName());//不写包名也可以，但会扫描所有的包，初次加载很慢。
+    Set<Class<? extends INode>> registerClasses = reflections.getSubTypesOf(INode.class);
+    for (Class<? extends INode> clazz : registerClasses) {
+      typeMapping.put(clazz.getSimpleName(), clazz);
     }
   }
 
@@ -87,7 +64,7 @@ public class ASTParser {
       for (Map.Entry<String, Object> entry : tree.entrySet()) {
         String key = entry.getKey();
         Object value = entry.getValue();
-//获取key 对应的field。
+        //获取key 对应的field。
         Field field = getField(fields, key);
         if (field == null) {
           System.out.println("未在类型" + type + "中找到字段：" + key);

@@ -1,10 +1,12 @@
 package org.qiuer.ast.expression;
 
 import org.qiuer.ast.assign.AssignmentOperator;
+import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
+import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
 import java.util.ArrayList;
@@ -18,7 +20,9 @@ public class AssignmentExpression extends Expression{
 
   @Override
   public void compile() throws IException {
-
+    EValidate.notNull(operator);
+    EValidate.notNull(left);
+    EValidate.notNull(right);
   }
 
   @Override
@@ -26,7 +30,9 @@ public class AssignmentExpression extends Expression{
     AssignmentOperator op = AssignmentOperator.parse(operator);
     switch (op){
       case EQUAL:
-        Object value = right.run(context);
+        Object value;
+        if(right instanceof Function){ value = right; }
+        else { value = right.run(context); }
         if (left instanceof AbstractAssignPathExpression){
           AbstractAssignPathExpression assignPathExpression = (AbstractAssignPathExpression) left;
           List<Object> path = new ArrayList<>();

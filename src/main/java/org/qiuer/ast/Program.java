@@ -1,7 +1,6 @@
 package org.qiuer.ast;
 
 import org.qiuer.ast.statement.IStatement;
-import org.qiuer.ast.statement.Statement;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.EReturn;

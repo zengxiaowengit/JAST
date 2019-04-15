@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression;
 
+import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.core.Context;
 import org.qiuer.exception.IException;
 
@@ -23,7 +24,16 @@ public class MemberExpression extends AbstractAssignPathExpression{
     List<Object> path = new ArrayList<>();
     object.addMemberPath(path);
     property.addMemberPath(path);
-    return object.getVariableValue(context, path);
+    Object ret = object.getVariableValue(context, path);
+    if(ret instanceof SystemFunction && ((SystemFunction) ret).allowPropCall()){//特例，通过属性访问的函数。
+      SystemFunction function = (SystemFunction) ret;
+      List<IExpression> arguments = new ArrayList<>();
+      arguments.add(this.object);
+      CallExpression callExpression = new CallExpression(function, arguments);
+      callExpression.compile();
+      return callExpression.run(context);
+    }
+    return ret;
   }
 
   @Override

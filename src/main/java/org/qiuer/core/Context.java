@@ -56,8 +56,6 @@ public class Context{
     functionContext.exitBlock();
   }
 
-
-
   public Map<String, Object> getCurrentContext() {
     return variableContext.getCurrentContext();
   }

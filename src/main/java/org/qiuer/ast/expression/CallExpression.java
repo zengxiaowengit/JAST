@@ -1,6 +1,7 @@
 package org.qiuer.ast.expression;
 
 import org.qiuer.ast.expression.function.Function;
+import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
 import org.qiuer.exception.*;
@@ -13,20 +14,29 @@ public class CallExpression extends Expression {
   IExpression callee;
   List<IExpression> arguments = new ArrayList<>();//调用参数
 
+  private boolean compiled = false;
+
+  public CallExpression(){}
+  public CallExpression(IExpression callee, List<IExpression> arguments){
+    this.callee = callee;
+    this.arguments = arguments;
+  }
+
   @Override
   public void compile() throws IException {
-    if (callee instanceof MemberExpression) {//函数作为成员函数调用时，第一个参数是调用对象本身。
-      arguments.add(0, ((MemberExpression) callee).object);
-    }
-    // 普通函数定义，是通过Identifier找到函数，然后调用。
   }
 
   @Override
   public Object run(Context context) throws IException {
     try {
       context.enterBlock();
-      Function function = (Function) callee.run(context);
+
+      Function function;
+      if (callee instanceof Function) function = (Function) callee;
+      else function = (Function) callee.run(context);
+      beforeRun(function);
       EValidate.assertTrue(function.params.size() == arguments.size(), "函数调用参数个数必须和函数定义参数个数相同");
+
       int size = arguments.size();
       // 初始化函数的参数
       for (int i = 0; i < size; i++) {
@@ -48,6 +58,23 @@ public class CallExpression extends Expression {
       throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());
     }finally {
       context.exitBlock();
+    }
+  }
+
+  private void beforeRun(Function function){
+    //系统注册函数，通过成员函数调用时，会把自身作为第一个参数传入。如：data.push(1)变成push(data, 1)的形式。
+    //js只能在运行时编译。只能在第一次运行时做类似的事情。
+    if(!compiled){
+      synchronized (this){
+        if(!compiled){ //防止并发问题。再检测一遍。
+          if ((callee instanceof MemberExpression)
+                  && function instanceof SystemFunction
+                  && ((SystemFunction) function).registerToOrNull() != null) {
+            arguments.add(0, ((MemberExpression) callee).object);
+          }
+        }
+        compiled = true;
+      }
     }
   }
 

@@ -67,77 +67,102 @@ abstract class BinaryOperation<T>{
 //  public abstract boolean GREAT_EQUAL(T left, T right);
 //  public abstract void LEFT_SHIFT(T left, T right);
 //  public abstract void RIGHT_SHIFT(T left, T right);
-  public abstract T PLUS(T left, T right);
-  public abstract T MINUS(T left, T right);
-  public abstract T MULTIPLY(T left, T right);
-  public abstract BigDecimal DIVIDE(T left, T right);
-  public abstract T MOD(T left, T right) throws ERuntime;
+  public abstract T PLUS(Object left, Object right) throws ERuntime;
+  public abstract T MINUS(Object left, Object right) throws ERuntime;
+  public abstract T MULTIPLY(Object left, Object right) throws ERuntime;
+  public abstract BigDecimal DIVIDE(Object left, Object right) throws ERuntime;
+  public abstract T MOD(Object left, Object right) throws ERuntime;
 
   protected static final int DIVIDE_SCALE = 10;
 
   public BigDecimal DivideDecimal(BigDecimal a, BigDecimal b){
     return a.divide(b, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
   }
+
+
+  protected BigDecimal toBigDecimal(Object object) throws ERuntime {
+    if(object instanceof BigDecimal){
+      return (BigDecimal) object;
+    }
+    try {
+      return new BigDecimal(String.valueOf(object));
+    }catch (Exception e){
+      throw new ERuntime(Const.EXCEPTION.TYPE_CAST_ERROR, object.getClass().getSimpleName() + "类型不能转换为数值类型");
+    }
+  }
+
+  protected Long toLong(Object object) throws ERuntime {
+    if(object instanceof Long){
+      return (Long) object;
+    }
+    try {
+      return new Long(String.valueOf(object));
+    }catch (Exception e){
+      throw new ERuntime(Const.EXCEPTION.TYPE_CAST_ERROR, object.getClass().getSimpleName() + "类型不能转换为Long类型");
+    }
+  }
 }
 
 class LongBinaryOperation extends BinaryOperation<Long>{
 
   @Override
-  public Long PLUS(Long left, Long right) {
-    return left + right;
+  public Long PLUS(Object left, Object right) throws ERuntime {
+    return toLong(left) + toLong(right);
   }
 
   @Override
-  public Long MINUS(Long left, Long right) {
-    return left - right;
+  public Long MINUS(Object left, Object right) throws ERuntime {
+    return toLong(left) - toLong(right);
   }
 
   @Override
-  public Long MULTIPLY(Long left, Long right) {
-    return left * right;
+  public Long MULTIPLY(Object left, Object right) throws ERuntime {
+    return toLong(left) * toLong(right);
   }
 
   @Override
-  public BigDecimal DIVIDE(Long left, Long right) {
-    BigDecimal a = new BigDecimal(left);
-    BigDecimal b = new BigDecimal(right);
-    return super.DivideDecimal(a, b);
+  public BigDecimal DIVIDE(Object left, Object right) throws ERuntime {
+    return super.DivideDecimal(toBigDecimal(left), toBigDecimal(right));
   }
 
   @Override
-  public Long MOD(Long left, Long right) {
-    return left % right;
+  public Long MOD(Object left, Object right) throws ERuntime {
+    return toLong(left) % toLong(right);
   }
+
 }
 
 class BigDecimalBinaryOperation extends BinaryOperation<BigDecimal>{
 
   @Override
-  public BigDecimal PLUS(BigDecimal left, BigDecimal right) {
-    return left.add(right);
+  public BigDecimal PLUS(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).add(toBigDecimal(right));
   }
 
   @Override
-  public BigDecimal MINUS(BigDecimal left, BigDecimal right) {
-    return left.subtract(right);
+  public BigDecimal MINUS(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).subtract(toBigDecimal(right));
   }
 
   @Override
-  public BigDecimal MULTIPLY(BigDecimal left, BigDecimal right) {
-    return left.multiply(right);
+  public BigDecimal MULTIPLY(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).multiply(toBigDecimal(right));
   }
 
   @Override
-  public BigDecimal DIVIDE(BigDecimal left, BigDecimal right) {
-    return super.DivideDecimal(left, right);
+  public BigDecimal DIVIDE(Object left, Object right) throws ERuntime {
+    return super.DivideDecimal(toBigDecimal(left), toBigDecimal(right));
   }
 
   @Override
-  public BigDecimal MOD(BigDecimal left, BigDecimal right) throws ERuntime {
-    BigDecimal[] remainder = left.divideAndRemainder(right);
+  public BigDecimal MOD(Object left, Object right) throws ERuntime {
+    BigDecimal a = toBigDecimal(left);
+    BigDecimal b = toBigDecimal(right);
+    BigDecimal[] remainder = a.divideAndRemainder(b);
     if(remainder == null || remainder.length == 0){
-      throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, left.toPlainString() + "%" + left.toPlainString() + "失败");
+      throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, a.toPlainString() + "%" + b.toPlainString() + "失败");
     }
     return remainder[remainder.length - 1];
   }
+
 }

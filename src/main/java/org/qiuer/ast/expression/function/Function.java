@@ -23,7 +23,6 @@ public abstract class Function extends Expression{
 
   @Override
   public void compile() throws IException {
-    EValidate.notNull(id);
     EValidate.notNull(body);
   }
 }

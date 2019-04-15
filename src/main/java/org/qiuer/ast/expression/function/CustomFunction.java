@@ -1,21 +1,22 @@
 package org.qiuer.ast.expression.function;
 
-public abstract class CustomFunction extends Function {
+import org.qiuer.core.Context;
+import org.qiuer.exception.EValidate;
+import org.qiuer.exception.IException;
 
-  /**
-   * 获取定义的函数名字。
-   * @return
-   */
-  public abstract String getName();
+/**
+ * 在js代码里，使用者自己写的通过function aaa() { ... } 的函数。
+ */
+public class CustomFunction extends Function {
 
-  public abstract Class registerTo();
+  @Override
+  public void compile() throws IException {
+    super.compile();
+    EValidate.notNull(id);
+  }
 
-  /**
-   * 是否允许属性调用。如：list.length() 简化为 list.length调用。
-   * 注：如果变量和函数重名，变量的优先级是高于该函数的优先级的。虽然不推荐存在这样的代码。
-   * 除了ECMA Script支持的默认属性，不推荐设置为true。一般应该设置为false。
-   * @return
-   */
-  public abstract boolean allowPropCall();
-
+  @Override
+  public Object run(Context context) throws IException {
+    return this.body.run(context);
+  }
 }

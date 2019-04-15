@@ -15,24 +15,21 @@ import java.util.List;
 /**
  * list.push(element)
  */
-public class ArrayPushFunction extends SystemFunction {
-  public String type = "ArrayPushFunction";
+public class ArrayLengthFunction extends SystemFunction {
+  public String type = "ArrayLengthFunction";
 
   @Override
   public void compile() {
-    this.id = new Identifier("push");
+    this.id = new Identifier("length");
     this.params = new ArrayList<>();
     this.params.add(new Identifier("list"));
-    this.params.add(new Identifier("element"));
   }
 
   @Override
   public Object run(Context context) throws IException {
-    if(this.params != null && this.params.size() == 2){
+    if(this.params != null && this.params.size() == 1){
       List<Object> list = EValidate.cast(this.params.get(0).run(context), List.class);
-      Object element = this.params.get(1).run(context);
-      list.add(element);
-      return element;
+      return list.size();
     }else {
       throw new ERuntime(Const.EXCEPTION.WRONG_PARAMS_ON_CALL,"调用" + this.type + "函数参数错误：" + JsonUtil.toJson(this.params));
     }
@@ -43,6 +40,6 @@ public class ArrayPushFunction extends SystemFunction {
     return List.class;
   }
 
-  @Override public boolean allowPropCall() { return false; }
+  @Override public boolean allowPropCall() { return true; }
 
 }

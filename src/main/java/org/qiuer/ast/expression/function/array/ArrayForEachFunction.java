@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * list.push(element)
  */
-public class ArrayPushFunction extends SystemFunction {
-  public String type = "ArrayPushFunction";
+public class ArrayForEachFunction extends SystemFunction {
+  public String type = "ArrayForEachFunction";
 
   @Override
   public void compile() {
-    this.id = new Identifier("push");
+    this.id = new Identifier("forEach");
     this.params = new ArrayList<>();
     this.params.add(new Identifier("list"));
     this.params.add(new Identifier("element"));

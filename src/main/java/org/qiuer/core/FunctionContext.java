@@ -1,8 +1,7 @@
 package org.qiuer.core;
 
-import org.qiuer.ast.expression.function.CustomFunction;
 import org.qiuer.ast.expression.function.Function;
-import org.qiuer.exception.Const;
+import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.IException;
 import org.reflections.Reflections;
@@ -19,15 +18,16 @@ import java.util.Set;
  */
 public class FunctionContext extends AbstractRuntimeContext<String, Function> {
 
-  private static final HashMap<String, CustomFunction> listRegister = new HashMap<>();
-  private static final HashMap<String, CustomFunction> mapRegister = new HashMap<>();
-  private static final HashMap<String, CustomFunction> commonRegister = new HashMap<>();
+  private static final HashMap<String, SystemFunction> listRegister = new HashMap<>();
+  private static final HashMap<String, SystemFunction> mapRegister = new HashMap<>();
+  private static final HashMap<String, SystemFunction> objectRegister = new HashMap<>();//成员函数访问.如：xxx.toString()
+  private static final HashMap<String, SystemFunction> commonRegister = new HashMap<>();//非成员函数访问。如：Math.round(xxx, 2)
 
   static {
     try {
-      Reflections reflections = new Reflections(CustomFunction.class.getPackage().getName());
-      Set<Class<? extends CustomFunction>> registerClasses = reflections.getSubTypesOf(CustomFunction.class);
-      for (Class<? extends CustomFunction> clazz : registerClasses) {
+      Reflections reflections = new Reflections(SystemFunction.class.getPackage().getName());//不写包名也可以，但会扫描所有的包，初次加载很慢。
+      Set<Class<? extends SystemFunction>> registerClasses = reflections.getSubTypesOf(SystemFunction.class);
+      for (Class<? extends SystemFunction> clazz : registerClasses) {
         register(clazz);
       }
     } catch (Exception e) {
@@ -43,19 +43,16 @@ public class FunctionContext extends AbstractRuntimeContext<String, Function> {
    * @return
    * @throws IException
    */
-  public CustomFunction getFunction(Class clazz, String name) throws IException {
+  public SystemFunction getFunction(Class clazz, String name) throws IException {
     try {
       if (List.class.isAssignableFrom(clazz)){
         return listRegister.get(name);
       }else if (Map.class.isAssignableFrom(clazz)){
         return mapRegister.get(name);
       }else{
-        throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION,clazz.getSimpleName() + "类型暂不支持的函数：" + name);
+        return objectRegister.get(name);
       }
-    }catch (IException e1){
-      throw e1;
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ERuntime(1, "框架暂不支持的函数：" + name);
     }
@@ -75,20 +72,24 @@ public class FunctionContext extends AbstractRuntimeContext<String, Function> {
     return function;
   }
 
-  private static void register(Class<? extends CustomFunction> clazz) throws IllegalAccessException, InstantiationException, IException {
-    CustomFunction function = clazz.newInstance();
+  private static void register(Class<? extends SystemFunction> clazz) throws IllegalAccessException, InstantiationException, IException {
+    SystemFunction function = clazz.newInstance();
     function.compile();
-    Class register = function.registerTo();
-    CustomFunction registered;
-    if(List.class.isAssignableFrom(register)){
-      registered = listRegister.put(function.getName(), function);
-    }else if(Map.class.isAssignableFrom(register)){
-      registered = mapRegister.put(function.getName(), function);
+    Class register = function.registerToOrNull();
+    SystemFunction registered;
+    if(register == null){
+      registered = commonRegister.put(function.id.name, function);
     }else {
-      registered = commonRegister.put(function.getName(), function);
+      if(List.class.isAssignableFrom(register)){
+        registered = listRegister.put(function.id.name, function);
+      }else if(Map.class.isAssignableFrom(register)){
+        registered = mapRegister.put(function.id.name, function);
+      }else {
+        registered = objectRegister.put(function.id.name, function);
+      }
     }
     if(registered != null){
-      System.out.println("[Warning]: 函数注册出现重名："+ registered.getName());
+      System.out.println("[Warning]: 函数注册出现重名："+ registered.id.name);
     }
   }
 

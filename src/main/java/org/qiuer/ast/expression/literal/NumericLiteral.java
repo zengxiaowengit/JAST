@@ -1,8 +1,6 @@
 package org.qiuer.ast.expression.literal;
 
 import org.qiuer.core.Context;
-import org.qiuer.exception.Const;
-import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
