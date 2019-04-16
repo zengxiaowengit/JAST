@@ -51,6 +51,6 @@ public abstract class AbstractRuntimeContext<String, V> implements IRuntimeConte
     for (HashMap<String, V> map : context) {
       currentContext.putAll(map);
     }
-    return (Map<String, V>) Collections.unmodifiableMap(currentContext);
+    return (Map<String, V>) currentContext;
   }
 }
