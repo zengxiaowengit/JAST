@@ -28,7 +28,7 @@ public abstract class AbstractAssignPathExpression extends Expression{
   protected void updateVariableValue(Context context, List<Object> path, Object newVal) throws IException {
     int size = path == null? 0 :path.size();
     if(size == 1){
-      context.update(path.get(0).toString(), newVal);
+      context.updateVariable(path.get(0).toString(), newVal);
       return;
     }
     int lastIndex = size - 1;

@@ -3,6 +3,7 @@ package org.qiuer.ast.assign;
 import org.qiuer.ast.Node;
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.ast.expression.Identifier;
+import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
@@ -22,7 +23,10 @@ public class VariableDeclarator extends Node {
   @Override
   public Object run(Context context) throws IException {
     if (id instanceof Identifier) {
-      context.declare(((Identifier) id).name, init.run(context), "let");
+      if(init instanceof Function){
+        context.declareFunction(((Identifier) id).name, (Function) init);
+      }else
+        context.declareVariable(((Identifier) id).name, init.run(context), "let");
     } else {
       throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION, "不支持的表达式：" + type);
     }

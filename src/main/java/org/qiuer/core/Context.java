@@ -17,14 +17,14 @@ public class Context{
 
 
 
-  public Object update(String key, Object value) throws ERuntime {
+  public Object updateVariable(String key, Object value) throws ERuntime {
     if(assignContext.isModifiable(key)){
       return variableContext.update(key, value);
     }else
       throw new ERuntime(Const.EXCEPTION.VARIABLE_CANNOT_MODIFIED, "变量不可修改:" + key);
   }
 
-  public void declare(String key, Object value, String kind) {
+  public void declareVariable(String key, Object value, String kind) {
     variableContext.update(key, value);
   }
 

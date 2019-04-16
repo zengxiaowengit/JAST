@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BlockStatement extends Statement {
   String type = "BlockStatement";
-  List<Statement> body;
+  List<IStatement> body;
 
   @Override
   public void compile() throws IException {
@@ -20,7 +20,7 @@ public class BlockStatement extends Statement {
   @Override
   public Object run(Context context) throws IException {
     try {
-      for (Statement statement : body) {
+      for (IStatement statement : body) {
         statement.run(context);
       }
     }catch (EReturn eReturn){

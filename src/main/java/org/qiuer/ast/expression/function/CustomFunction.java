@@ -5,7 +5,7 @@ import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
 /**
- * 在js代码里，使用者自己写的通过function aaa() { ... } 的函数。
+ * 在js代码里，使用者自己写的通过function aaa() { ... } 定义的函数。
  */
 public class CustomFunction extends Function {
 

@@ -42,7 +42,7 @@ public class ArrayForEachFunction extends SystemFunction {
           IPattern param1 = function.params.get(0);
           if (param1 instanceof Identifier) {
             arguments.add((Identifier) param1);
-            context.update(((Identifier) param1).name, item);
+            context.updateVariable(((Identifier) param1).name, item);
           } else
             throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION, "箭头函数的参数名称只能是简单标识符");
         }
