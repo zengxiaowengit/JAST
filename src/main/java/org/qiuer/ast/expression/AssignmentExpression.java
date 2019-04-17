@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression;
 
+import org.apache.commons.lang.StringUtils;
 import org.qiuer.ast.assign.AssignmentOperator;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.pattern.IPattern;
@@ -30,19 +31,20 @@ public class AssignmentExpression extends Expression{
     AssignmentOperator op = AssignmentOperator.parse(operator);
     switch (op){
       case EQUAL:
-        Object value;
-        if(right instanceof Function){ value = right; }
-        else { value = right.run(context); }
         if (left instanceof AbstractAssignPathExpression){
           AbstractAssignPathExpression assignPathExpression = (AbstractAssignPathExpression) left;
           List<Object> path = new ArrayList<>();
           ((AbstractAssignPathExpression) left).addMemberPath(path);
-          assignPathExpression.updateVariableValue(context, path, value);
+
+          if(right instanceof Function)
+            context.declareFunction(StringUtils.join(path, "."), (Function) right);
+          else
+            assignPathExpression.updateVariableValue(context, path, right.run(context));
         }else {
           throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION,"类型暂不支持声明：" + left);
         }
         break;
-      default:throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION,"暂未支持的声明操作符：" + operator);
+      default: throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION,"暂未支持的声明操作符：" + operator);
     }
     return null;
   }

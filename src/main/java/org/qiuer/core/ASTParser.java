@@ -44,7 +44,7 @@ public class ASTParser {
     if (tree == null)
       return null;
     String type = tree.get("type").toString();
-    System.out.println(type);
+//    System.out.println(type);
     if (type == null) {
       System.out.println("没有type字段的节点：" + JsonUtil.toPrettyJson(tree));
       return null;

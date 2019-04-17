@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression;
 
+import org.apache.commons.lang.StringUtils;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
@@ -62,6 +63,7 @@ public abstract class AbstractAssignPathExpression extends Expression{
 
   protected Object getVariableValue(Context context, List<Object> path) throws IException {
     int size = path == null? 0 :path.size();
+    Object ret = null;
     if(size > 0){
       Object object = context.getVariableValue(path.get(0).toString());
       Object lastObject = object; //上一个object的值。
@@ -74,27 +76,30 @@ public abstract class AbstractAssignPathExpression extends Expression{
         if(object instanceof Map){
           lastObject = object;
           if(i == size - 1){
-            return ((Map) object).get(key.toString());
+            ret = ((Map) object).get(key.toString());
           }
           object = ((Map) object).get(key);
         }else if(object instanceof List){
           try {
             lastObject = object;
             int index = Integer.parseInt(key.toString());
-            if(i == size - 1){//最后一个property，更新对象的值。
-              return ((List) object).get(index);
+            if(i == size - 1){//最后一个property，get到值返回。
+              ret = ((List) object).get(index);
             }
             object = ((List) object).get(index);
-          }catch (Exception ignored){}// parseInt有可能出异常。如data.push(1)，push抛异常
+          }catch (Exception ignored){}// parseInt有可能出异常。如list.push(1)，push抛异常
 
-        }else {// 有可能是java对象，要直接设置属性。后续考虑吧。反射通过field | method设置值。
+        }else {// 有可能是java对象，要直接设置属性。后续考虑吧。
           throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION, "不支持为除了map和list以外的对象（以后可能会支持java对象）获取值：" + key);
         }
       }
-      // 不是属性值，有可能是函数调用。根据lastObject的类型去找全局定义的函数。
-      return context.getFunction(lastObject.getClass(), path.get(path.size() - 1).toString());
+      if (ret != null) return ret;
+      //根据lastObject的类型去找全局定义的函数。
+      ret = context.getFunction(lastObject.getClass(), path.get(path.size() - 1).toString());
+      if (ret != null) return ret;
+      //根据path找自定义函数
+      return context.getFunction(StringUtils.join(path, "."));
     }
-
     return null;
   }
 }

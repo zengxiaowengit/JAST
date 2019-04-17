@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression;
 
+import org.apache.commons.lang.StringUtils;
 import org.qiuer.ast.expression.function.ArrowFunctionExpression;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.expression.function.SystemFunction;
@@ -35,6 +36,7 @@ public class CallExpression extends Expression {
       Function function;
       if (callee instanceof Function) function = (Function) callee;
       else function = (Function) callee.run(context);
+      EValidate.notNull(function);
       beforeRun(function);
       EValidate.assertTrue(function.params.size() == arguments.size(), "函数调用参数个数必须和函数定义参数个数相同");
 
@@ -81,5 +83,4 @@ public class CallExpression extends Expression {
       }
     }
   }
-
 }
