@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 public class BinaryExpression extends Expression {
   public String type = "BinaryExpression";
   public String operator;
-  public Expression left;
-  public Expression right;
+  public IExpression left;
+  public IExpression right;
 
   public BinaryOperator binaryOperator;
 
@@ -44,6 +44,10 @@ public class BinaryExpression extends Expression {
         }else
           return ret;
       case MOD: return operation.MOD(a, b);
+      case LESS: return operation.LESS(a, b);
+      case LESS_EQUAL:return operation.LESS_EQUAL(a, b);
+      case GREAT: return operation.GREAT(a, b);
+      case GREAT_EQUAL: return operation.GREAT_EQUAL(a, b);
       default:
         throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "暂不支持" + a.getClass().getSimpleName()
                 + "和" + b.getClass().getSimpleName() + "类型的操作：" + operator);

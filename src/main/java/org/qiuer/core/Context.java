@@ -1,5 +1,7 @@
 package org.qiuer.core;
 
+import org.qiuer.ast.expression.UpdateExpression;
+import org.qiuer.ast.expression.UpdateExpression.UpdateOperator;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
@@ -14,8 +16,6 @@ public class Context{
   private VariableContext variableContext = new VariableContext();
   private FunctionContext functionContext = new FunctionContext();
   private AssignContext assignContext = new AssignContext();
-
-
 
   public Object updateVariable(String key, Object value) throws ERuntime {
     if(assignContext.isModifiable(key)){

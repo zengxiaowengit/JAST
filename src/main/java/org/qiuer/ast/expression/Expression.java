@@ -4,4 +4,5 @@ import org.qiuer.ast.Node;
 import org.qiuer.ast.pattern.IPattern;
 
 public abstract class Expression extends Node implements IPattern,IExpression {
+  public String type = "Expression";
 }

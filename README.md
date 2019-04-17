@@ -20,5 +20,3 @@ declaration和pattern、Node不应该有run方法。
 > 暂时禁止使用this。不好实现，容易出bug。再考虑
 
 TODO 
-- 箭头函数的定义和使用。
-- 实现length

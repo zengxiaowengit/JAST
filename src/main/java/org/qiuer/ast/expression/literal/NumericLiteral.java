@@ -11,6 +11,9 @@ public class NumericLiteral extends Literal {
   public String type = "StringLiteral";
   public Object value;
 
+  public NumericLiteral(){}
+  public NumericLiteral(Number value){ this.value = value; }
+
   @Override
   public void compile() throws IException {
     EValidate.notNull(value);

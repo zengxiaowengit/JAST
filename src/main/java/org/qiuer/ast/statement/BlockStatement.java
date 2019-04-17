@@ -19,6 +19,7 @@ public class BlockStatement extends Statement {
 
   @Override
   public Object run(Context context) throws IException {
+    context.enterBlock();
     try {
       for (IStatement statement : body) {
         statement.run(context);
@@ -29,6 +30,8 @@ public class BlockStatement extends Statement {
       throw e;
     }catch (Exception e){
       throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());
+    }finally {
+      context.exitBlock();
     }
     return null;
   }

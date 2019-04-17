@@ -30,9 +30,8 @@ public class CallExpression extends Expression {
 
   @Override
   public Object run(Context context) throws IException {
+    context.enterBlock();//函数调用的传参需要新进入一个context。
     try {
-      context.enterBlock();
-
       Function function;
       if (callee instanceof Function) function = (Function) callee;
       else function = (Function) callee.run(context);

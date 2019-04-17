@@ -19,9 +19,16 @@ public enum BinaryOperator {
           | ">>>"
           | "|" | "^" | "&" | "in"
           | "instanceof" | ".."*/
-  DOUBLE_EQUAL, NOT_EQUAL,TRIPLE_EQUAL, NOT_DOUBLE_EQUAL,
-  LESS, LESS_EQUAL, GREAT, GREAT_EQUAL,
-  LEFT_SHIFT, RIGHT_SHIFT,
+  DOUBLE_EQUAL,
+  NOT_EQUAL,
+  TRIPLE_EQUAL,
+  NOT_DOUBLE_EQUAL,
+  LESS,
+  LESS_EQUAL,
+  GREAT,
+  GREAT_EQUAL,
+  LEFT_SHIFT,
+  RIGHT_SHIFT,
   PLUS,
   MINUS,
   MULTIPLY,
@@ -57,28 +64,27 @@ public enum BinaryOperator {
 
 abstract class BinaryOperation<T>{
   //TODO 有空再实现。
-//  public abstract boolean DOUBLE_EQUAL(T left , T right);
-//  public abstract boolean NOT_EQUAL(T left, T right);
-//  public abstract boolean TRIPLE_EQUAL(T left, T right);
-//  public abstract boolean NOT_DOUBLE_EQUAL(T left, T right);
-//  public abstract boolean LESS(T left, T right);
-//  public abstract boolean LESS_EQUAL(T left, T right);
-//  public abstract boolean GREAT(T left, T right);
-//  public abstract boolean GREAT_EQUAL(T left, T right);
-//  public abstract void LEFT_SHIFT(T left, T right);
-//  public abstract void RIGHT_SHIFT(T left, T right);
-  public abstract T PLUS(Object left, Object right) throws ERuntime;
+//  public abstract boolean DOUBLE_EQUAL(Object left , Object right) throws ERuntime ;
+//  public abstract boolean NOT_EQUAL(Object left, Object right) throws ERuntime ;
+//  public abstract boolean TRIPLE_EQUAL(Object left, Object right) throws ERuntime ;
+//  public abstract boolean NOT_DOUBLE_EQUAL(Object left, Object right) throws ERuntime ;
+  public abstract boolean LESS(Object left, Object right) throws ERuntime;
+  public abstract boolean LESS_EQUAL(Object left, Object right) throws ERuntime ;
+  public abstract boolean GREAT(Object left, Object right) throws ERuntime ;
+  public abstract boolean GREAT_EQUAL(Object left, Object right) throws ERuntime ;
   public abstract T MINUS(Object left, Object right) throws ERuntime;
   public abstract T MULTIPLY(Object left, Object right) throws ERuntime;
   public abstract BigDecimal DIVIDE(Object left, Object right) throws ERuntime;
   public abstract T MOD(Object left, Object right) throws ERuntime;
+//  public abstract void LEFT_SHIFT(Object left, Object right) throws ERuntime ;
+//  public abstract void RIGHT_SHIFT(Object left, Object right) throws ERuntime ;
 
   protected static final int DIVIDE_SCALE = 10;
 
   public BigDecimal DivideDecimal(BigDecimal a, BigDecimal b){
     return a.divide(b, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
   }
-
+  public abstract T PLUS(Object left, Object right) throws ERuntime;
 
   protected BigDecimal toBigDecimal(Object object) throws ERuntime {
     if(object instanceof BigDecimal){
@@ -104,6 +110,26 @@ abstract class BinaryOperation<T>{
 }
 
 class LongBinaryOperation extends BinaryOperation<Long>{
+
+  @Override
+  public boolean LESS(Object left, Object right) throws ERuntime {
+    return toLong(left) < toLong(right);
+  }
+
+  @Override
+  public boolean LESS_EQUAL(Object left, Object right) throws ERuntime {
+    return toLong(left) <= toLong(right);
+  }
+
+  @Override
+  public boolean GREAT(Object left, Object right) throws ERuntime {
+    return toLong(left) > toLong(right);
+  }
+
+  @Override
+  public boolean GREAT_EQUAL(Object left, Object right) throws ERuntime {
+    return toLong(left) >= toLong(right);
+  }
 
   @Override
   public Long PLUS(Object left, Object right) throws ERuntime {
@@ -137,6 +163,26 @@ class BigDecimalBinaryOperation extends BinaryOperation<BigDecimal>{
   @Override
   public BigDecimal PLUS(Object left, Object right) throws ERuntime {
     return toBigDecimal(left).add(toBigDecimal(right));
+  }
+
+  @Override
+  public boolean LESS(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).compareTo(toBigDecimal(right)) < 0;
+  }
+
+  @Override
+  public boolean LESS_EQUAL(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).compareTo(toBigDecimal(right)) <= 0;
+  }
+
+  @Override
+  public boolean GREAT(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).compareTo(toBigDecimal(right)) > 0;
+  }
+
+  @Override
+  public boolean GREAT_EQUAL(Object left, Object right) throws ERuntime {
+    return toBigDecimal(left).compareTo(toBigDecimal(right)) >= 0;
   }
 
   @Override

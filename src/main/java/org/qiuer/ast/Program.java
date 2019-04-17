@@ -22,15 +22,16 @@ public class Program extends Node {
   public Object run(Context context) throws EReturn {
     try {
       context.enterBlock();
+      //到时候put一些全局变量进去。如：JSON.parse()
       for (IStatement statement : body){
         statement.run(context);
       }
-      System.out.println(JsonUtil.toPrettyJson(context));
+//      System.out.println(JsonUtil.toPrettyJson(context));
     } catch (IException e1) {
       throw new EReturn(e1.getCode(), e1.getMsg(), null);
     } catch (Exception e2) {
       e2.printStackTrace();
-      throw new EReturn(Const.EXCEPTION.UNKNOWN_ERROR, e2.getMessage(), null);
+      throw new EReturn(Const.EXCEPTION.UNKNOWN_ERROR, e2.getMessage() == null? "未知错误" : e2.getMessage(), null);
     }finally {
       context.exitBlock();
     }

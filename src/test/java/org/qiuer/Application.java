@@ -28,9 +28,12 @@ public class Application {
 
 
     Program program = ASTParser.parse(json);
+    long start = System.currentTimeMillis();
     EReturn ret = ASTRunner.run(program);
 
     System.out.println("=======================Return==========================");
+    System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
     System.out.println(JsonUtil.toPrettyJson(ret));
+
   }
 }
