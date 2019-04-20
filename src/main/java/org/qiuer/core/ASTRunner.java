@@ -2,15 +2,18 @@ package org.qiuer.core;
 
 import org.qiuer.ast.Program;
 import org.qiuer.exception.EReturn;
+import org.qiuer.exception.IException;
 
 public class ASTRunner {
 
-  public static EReturn run(Program program){
+  public static Object run(Program program){
     try {
       Context context = new Context();
-      program.run(context);
+      return program.run(context);
     } catch (EReturn eReturn) {
       return eReturn;
+    } catch (IException e) {
+      e.printStackTrace();
     }
     return null;
   }

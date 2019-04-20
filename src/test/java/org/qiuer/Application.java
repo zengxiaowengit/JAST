@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Application {
@@ -29,11 +31,20 @@ public class Application {
 
     Program program = ASTParser.parse(json);
     long start = System.currentTimeMillis();
-    EReturn ret = ASTRunner.run(program);
+    Object ret = ASTRunner.run(program);
 
     System.out.println("=======================Return==========================");
     System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
     System.out.println(JsonUtil.toPrettyJson(ret));
+
+    System.out.println("=======================================================");
+    start = System.currentTimeMillis();
+    List<Integer> a = new ArrayList<>();
+    for (int i = 0; i < 10000; i++){
+      a.add(i);
+    }
+    System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
+
 
   }
 }

@@ -19,7 +19,7 @@ public class ThisExpression extends AbstractAssignPathExpression{
   }
 
   @Override
-  public void addMemberPath(List<Object> path) {
+  public void addMemberPath(List<String> path) {
     path.add("this");
   }
 }

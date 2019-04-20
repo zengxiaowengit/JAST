@@ -7,6 +7,7 @@ import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
 import org.qiuer.exception.*;
+import org.qiuer.util.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,10 @@ public class CallExpression extends Expression {
     context.enterBlock();//函数调用的传参需要新进入一个context。
     try {
       Function function;
-      if (callee instanceof Function) function = (Function) callee;
-      else function = (Function) callee.run(context);
+      if(callee instanceof MemberExpression) function = ((MemberExpression) callee).getFunction(context);
+      else if(callee instanceof Identifier) function = ((Identifier) callee).getFunction(context);
+      else if (callee instanceof Function) function = (Function) callee;
+      else throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "函数调用只支持标识符和成员函数调用");
       EValidate.notNull(function);
       beforeRun(function);
       EValidate.assertTrue(function.params.size() == arguments.size(), "函数调用参数个数必须和函数定义参数个数相同");

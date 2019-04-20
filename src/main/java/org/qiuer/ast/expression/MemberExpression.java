@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression;
 
+import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.core.Context;
 import org.qiuer.exception.IException;
@@ -21,7 +22,7 @@ public class MemberExpression extends AbstractAssignPathExpression{
 
   @Override
   public Object run(Context context) throws IException {
-    List<Object> path = new ArrayList<>();
+    List<String> path = new ArrayList<>();
     object.addMemberPath(path);
     property.addMemberPath(path);
     Object ret = object.getVariableValue(context, path);
@@ -37,8 +38,21 @@ public class MemberExpression extends AbstractAssignPathExpression{
   }
 
   @Override
-  public void addMemberPath(List<Object> path) throws IException {
+  public void addMemberPath(List<String> path) throws IException {
       object.addMemberPath(path);
       property.addMemberPath(path);
+  }
+
+  /**
+   * 获取成员函数
+   * @param context
+   * @throws IException
+   */
+  public Function getFunction(Context context) throws IException {
+    List<String> path = new ArrayList<>();
+    object.addMemberPath(path);
+    Class type = object.run(context).getClass();
+    property.addMemberPath(path);
+    return context.getFunction(type, path.get(path.size() - 1));
   }
 }

@@ -21,7 +21,7 @@ public class StringLiteral extends Literal {
   }
 
   @Override
-  public void addMemberPath(List<Object> path) throws IException {
+  public void addMemberPath(List<String> path) throws IException {
     path.add(value);
   }
 }

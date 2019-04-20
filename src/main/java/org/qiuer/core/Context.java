@@ -1,7 +1,5 @@
 package org.qiuer.core;
 
-import org.qiuer.ast.expression.UpdateExpression;
-import org.qiuer.ast.expression.UpdateExpression.UpdateOperator;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;

@@ -33,7 +33,7 @@ public class AssignmentExpression extends Expression{
       case EQUAL:
         if (left instanceof AbstractAssignPathExpression){
           AbstractAssignPathExpression assignPathExpression = (AbstractAssignPathExpression) left;
-          List<Object> path = new ArrayList<>();
+          List<String> path = new ArrayList<>();
           ((AbstractAssignPathExpression) left).addMemberPath(path);
 
           if(right instanceof Function)

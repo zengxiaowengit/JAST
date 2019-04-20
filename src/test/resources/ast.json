@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 690,
+  "end": 673,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 38,
+      "line": 40,
       "column": 1
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 690,
+    "end": 673,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 38,
+        "line": 40,
         "column": 1
       }
     },
@@ -31,45 +31,45 @@
     "body": [
       {
         "type": "VariableDeclaration",
-        "start": 44,
-        "end": 65,
+        "start": 45,
+        "end": 67,
         "loc": {
           "start": {
-            "line": 3,
-            "column": 0
+            "line": 2,
+            "column": 2
           },
           "end": {
-            "line": 3,
-            "column": 21
+            "line": 2,
+            "column": 24
           }
         },
         "declarations": [
           {
             "type": "VariableDeclarator",
-            "start": 48,
-            "end": 64,
+            "start": 49,
+            "end": 66,
             "loc": {
               "start": {
-                "line": 3,
-                "column": 4
+                "line": 2,
+                "column": 6
               },
               "end": {
-                "line": 3,
-                "column": 20
+                "line": 2,
+                "column": 23
               }
             },
             "id": {
               "type": "Identifier",
-              "start": 48,
-              "end": 52,
+              "start": 49,
+              "end": 53,
               "loc": {
                 "start": {
-                  "line": 3,
-                  "column": 4
+                  "line": 2,
+                  "column": 6
                 },
                 "end": {
-                  "line": 3,
-                  "column": 8
+                  "line": 2,
+                  "column": 10
                 },
                 "identifierName": "tips"
               },
@@ -77,46 +77,46 @@
             },
             "init": {
               "type": "ObjectExpression",
-              "start": 55,
-              "end": 64,
+              "start": 56,
+              "end": 66,
               "loc": {
                 "start": {
-                  "line": 3,
-                  "column": 11
+                  "line": 2,
+                  "column": 13
                 },
                 "end": {
-                  "line": 3,
-                  "column": 20
+                  "line": 2,
+                  "column": 23
                 }
               },
               "properties": [
                 {
                   "type": "ObjectProperty",
-                  "start": 56,
-                  "end": 63,
+                  "start": 57,
+                  "end": 65,
                   "loc": {
                     "start": {
-                      "line": 3,
-                      "column": 12
+                      "line": 2,
+                      "column": 14
                     },
                     "end": {
-                      "line": 3,
-                      "column": 19
+                      "line": 2,
+                      "column": 22
                     }
                   },
                   "method": false,
                   "key": {
                     "type": "Identifier",
-                    "start": 56,
-                    "end": 60,
+                    "start": 57,
+                    "end": 61,
                     "loc": {
                       "start": {
-                        "line": 3,
-                        "column": 12
+                        "line": 2,
+                        "column": 14
                       },
                       "end": {
-                        "line": 3,
-                        "column": 16
+                        "line": 2,
+                        "column": 18
                       },
                       "identifierName": "data"
                     },
@@ -126,16 +126,16 @@
                   "shorthand": false,
                   "value": {
                     "type": "ArrayExpression",
-                    "start": 61,
-                    "end": 63,
+                    "start": 63,
+                    "end": 65,
                     "loc": {
                       "start": {
-                        "line": 3,
-                        "column": 17
+                        "line": 2,
+                        "column": 20
                       },
                       "end": {
-                        "line": 3,
-                        "column": 19
+                        "line": 2,
+                        "column": 22
                       }
                     },
                     "elements": []
@@ -166,386 +166,18 @@
         ],
         "trailingComments": [
           {
-            "type": "CommentLine",
-            "value": " tips.code = 0;",
-            "start": 66,
-            "end": 83,
+            "type": "CommentBlock",
+            "value": "\ntips.code = 0;\n  tips.msg = tips.data[0];\n\n  tips.data.push(tips.data[0] + tips.data[1]);\n\n\n  function add(a, b) {\n    return a + b;\n  }\n\n  tips.data.push(add(8880, 8));\n\n  tips.add = (a, b) => {\n    let tmp = a + b;\n    tips.data.push(tmp);\n  }\n\n  tips.add(9990, 9);\n  tips.add(1000, 9);\n  tips.length = tips.data.length;\n\n  tips.add(1000, 1 + 51 % 2 / 20);\n  tips.sum = 0;\n  let i = 0;\n  tips.data.forEach(element => {\n    i = i + 1;\n    tips.sum = tips.sum + element;\n  });\n// if else for map filter forEach\n// import\n// Math.round(), toFixed()\n\n",
+            "start": 68,
+            "end": 622,
             "loc": {
               "start": {
-                "line": 4,
+                "line": 3,
                 "column": 0
               },
               "end": {
-                "line": 4,
-                "column": 17
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.msg = tips.data[0];",
-            "start": 84,
-            "end": 111,
-            "loc": {
-              "start": {
-                "line": 5,
-                "column": 0
-              },
-              "end": {
-                "line": 5,
-                "column": 27
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.data.push(tips.data[0] + tips.data[1]);",
-            "start": 113,
-            "end": 160,
-            "loc": {
-              "start": {
-                "line": 7,
-                "column": 0
-              },
-              "end": {
-                "line": 7,
-                "column": 47
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " function add(a, b){",
-            "start": 163,
-            "end": 185,
-            "loc": {
-              "start": {
-                "line": 10,
-                "column": 0
-              },
-              "end": {
-                "line": 10,
-                "column": 22
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   return a + b;",
-            "start": 186,
-            "end": 204,
-            "loc": {
-              "start": {
-                "line": 11,
-                "column": 0
-              },
-              "end": {
-                "line": 11,
-                "column": 18
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " }",
-            "start": 205,
-            "end": 209,
-            "loc": {
-              "start": {
-                "line": 12,
-                "column": 0
-              },
-              "end": {
-                "line": 12,
-                "column": 4
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.data.push(add(8880, 8));",
-            "start": 211,
-            "end": 243,
-            "loc": {
-              "start": {
-                "line": 14,
-                "column": 0
-              },
-              "end": {
-                "line": 14,
-                "column": 32
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add = (a, b)=>{",
-            "start": 245,
-            "end": 268,
-            "loc": {
-              "start": {
-                "line": 16,
-                "column": 0
-              },
-              "end": {
-                "line": 16,
-                "column": 23
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   let tmp = a + b;",
-            "start": 269,
-            "end": 290,
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 0
-              },
-              "end": {
-                "line": 17,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   tips.data.push(tmp);",
-            "start": 291,
-            "end": 316,
-            "loc": {
-              "start": {
-                "line": 18,
-                "column": 0
-              },
-              "end": {
-                "line": 18,
-                "column": 25
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " }",
-            "start": 317,
-            "end": 321,
-            "loc": {
-              "start": {
-                "line": 19,
-                "column": 0
-              },
-              "end": {
-                "line": 19,
-                "column": 4
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add(9990, 9);",
-            "start": 323,
-            "end": 344,
-            "loc": {
-              "start": {
-                "line": 21,
-                "column": 0
-              },
-              "end": {
-                "line": 21,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add(1000, 9);",
-            "start": 345,
-            "end": 366,
-            "loc": {
-              "start": {
-                "line": 22,
-                "column": 0
-              },
-              "end": {
-                "line": 22,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.length = tips.data.length;",
-            "start": 367,
-            "end": 401,
-            "loc": {
-              "start": {
-                "line": 23,
-                "column": 0
-              },
-              "end": {
-                "line": 23,
-                "column": 34
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add(1000, 1 + 51%2 / 20);",
-            "start": 403,
-            "end": 436,
-            "loc": {
-              "start": {
-                "line": 25,
-                "column": 0
-              },
-              "end": {
-                "line": 25,
-                "column": 33
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " // if else for map filter forEach",
-            "start": 437,
-            "end": 473,
-            "loc": {
-              "start": {
-                "line": 26,
-                "column": 0
-              },
-              "end": {
-                "line": 26,
-                "column": 36
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " // import",
-            "start": 474,
-            "end": 486,
-            "loc": {
-              "start": {
-                "line": 27,
-                "column": 0
-              },
-              "end": {
-                "line": 27,
-                "column": 12
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " // Math.round(), toFixed()",
-            "start": 487,
-            "end": 516,
-            "loc": {
-              "start": {
-                "line": 28,
-                "column": 0
-              },
-              "end": {
-                "line": 28,
-                "column": 29
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.sum = 0;",
-            "start": 517,
-            "end": 533,
-            "loc": {
-              "start": {
-                "line": 29,
-                "column": 0
-              },
-              "end": {
-                "line": 29,
-                "column": 16
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " let i = 0;",
-            "start": 534,
-            "end": 547,
-            "loc": {
-              "start": {
-                "line": 30,
-                "column": 0
-              },
-              "end": {
-                "line": 30,
-                "column": 13
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.data.forEach(element =>{",
-            "start": 548,
-            "end": 580,
-            "loc": {
-              "start": {
-                "line": 31,
-                "column": 0
-              },
-              "end": {
-                "line": 31,
-                "column": 32
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   i = i + 1;",
-            "start": 581,
-            "end": 596,
-            "loc": {
-              "start": {
-                "line": 32,
-                "column": 0
-              },
-              "end": {
-                "line": 32,
-                "column": 15
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   tips.sum = tips.sum + element;",
-            "start": 597,
-            "end": 632,
-            "loc": {
-              "start": {
-                "line": 33,
-                "column": 0
-              },
-              "end": {
-                "line": 33,
-                "column": 35
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " });",
-            "start": 633,
-            "end": 639,
-            "loc": {
-              "start": {
-                "line": 34,
-                "column": 0
-              },
-              "end": {
-                "line": 34,
-                "column": 6
+                "line": 36,
+                "column": 2
               }
             }
           }
@@ -553,44 +185,44 @@
       },
       {
         "type": "ForStatement",
-        "start": 641,
-        "end": 690,
+        "start": 624,
+        "end": 673,
         "loc": {
           "start": {
-            "line": 36,
+            "line": 38,
             "column": 0
           },
           "end": {
-            "line": 38,
+            "line": 40,
             "column": 1
           }
         },
         "init": {
           "type": "AssignmentExpression",
-          "start": 645,
-          "end": 650,
+          "start": 628,
+          "end": 633,
           "loc": {
             "start": {
-              "line": 36,
+              "line": 38,
               "column": 4
             },
             "end": {
-              "line": 36,
+              "line": 38,
               "column": 9
             }
           },
           "operator": "=",
           "left": {
             "type": "Identifier",
-            "start": 645,
-            "end": 646,
+            "start": 628,
+            "end": 629,
             "loc": {
               "start": {
-                "line": 36,
+                "line": 38,
                 "column": 4
               },
               "end": {
-                "line": 36,
+                "line": 38,
                 "column": 5
               },
               "identifierName": "i"
@@ -599,15 +231,15 @@
           },
           "right": {
             "type": "NumericLiteral",
-            "start": 649,
-            "end": 650,
+            "start": 632,
+            "end": 633,
             "loc": {
               "start": {
-                "line": 36,
+                "line": 38,
                 "column": 8
               },
               "end": {
-                "line": 36,
+                "line": 38,
                 "column": 9
               }
             },
@@ -620,29 +252,29 @@
         },
         "test": {
           "type": "BinaryExpression",
-          "start": 652,
-          "end": 661,
+          "start": 635,
+          "end": 644,
           "loc": {
             "start": {
-              "line": 36,
+              "line": 38,
               "column": 11
             },
             "end": {
-              "line": 36,
+              "line": 38,
               "column": 20
             }
           },
           "left": {
             "type": "Identifier",
-            "start": 652,
-            "end": 653,
+            "start": 635,
+            "end": 636,
             "loc": {
               "start": {
-                "line": 36,
+                "line": 38,
                 "column": 11
               },
               "end": {
-                "line": 36,
+                "line": 38,
                 "column": 12
               },
               "identifierName": "i"
@@ -652,15 +284,15 @@
           "operator": "<",
           "right": {
             "type": "NumericLiteral",
-            "start": 656,
-            "end": 661,
+            "start": 639,
+            "end": 644,
             "loc": {
               "start": {
-                "line": 36,
+                "line": 38,
                 "column": 15
               },
               "end": {
-                "line": 36,
+                "line": 38,
                 "column": 20
               }
             },
@@ -673,15 +305,15 @@
         },
         "update": {
           "type": "UpdateExpression",
-          "start": 663,
-          "end": 666,
+          "start": 646,
+          "end": 649,
           "loc": {
             "start": {
-              "line": 36,
+              "line": 38,
               "column": 22
             },
             "end": {
-              "line": 36,
+              "line": 38,
               "column": 25
             }
           },
@@ -689,15 +321,15 @@
           "prefix": false,
           "argument": {
             "type": "Identifier",
-            "start": 663,
-            "end": 664,
+            "start": 646,
+            "end": 647,
             "loc": {
               "start": {
-                "line": 36,
+                "line": 38,
                 "column": 22
               },
               "end": {
-                "line": 36,
+                "line": 38,
                 "column": 23
               },
               "identifierName": "i"
@@ -707,86 +339,86 @@
         },
         "body": {
           "type": "BlockStatement",
-          "start": 667,
-          "end": 690,
+          "start": 650,
+          "end": 673,
           "loc": {
             "start": {
-              "line": 36,
+              "line": 38,
               "column": 26
             },
             "end": {
-              "line": 38,
+              "line": 40,
               "column": 1
             }
           },
           "body": [
             {
               "type": "ExpressionStatement",
-              "start": 671,
-              "end": 688,
+              "start": 654,
+              "end": 671,
               "loc": {
                 "start": {
-                  "line": 37,
+                  "line": 39,
                   "column": 2
                 },
                 "end": {
-                  "line": 37,
+                  "line": 39,
                   "column": 19
                 }
               },
               "expression": {
                 "type": "CallExpression",
-                "start": 671,
-                "end": 688,
+                "start": 654,
+                "end": 671,
                 "loc": {
                   "start": {
-                    "line": 37,
+                    "line": 39,
                     "column": 2
                   },
                   "end": {
-                    "line": 37,
+                    "line": 39,
                     "column": 19
                   }
                 },
                 "callee": {
                   "type": "MemberExpression",
-                  "start": 671,
-                  "end": 685,
+                  "start": 654,
+                  "end": 668,
                   "loc": {
                     "start": {
-                      "line": 37,
+                      "line": 39,
                       "column": 2
                     },
                     "end": {
-                      "line": 37,
+                      "line": 39,
                       "column": 16
                     }
                   },
                   "object": {
                     "type": "MemberExpression",
-                    "start": 671,
-                    "end": 680,
+                    "start": 654,
+                    "end": 663,
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 39,
                         "column": 2
                       },
                       "end": {
-                        "line": 37,
+                        "line": 39,
                         "column": 11
                       }
                     },
                     "object": {
                       "type": "Identifier",
-                      "start": 671,
-                      "end": 675,
+                      "start": 654,
+                      "end": 658,
                       "loc": {
                         "start": {
-                          "line": 37,
+                          "line": 39,
                           "column": 2
                         },
                         "end": {
-                          "line": 37,
+                          "line": 39,
                           "column": 6
                         },
                         "identifierName": "tips"
@@ -795,15 +427,15 @@
                     },
                     "property": {
                       "type": "Identifier",
-                      "start": 676,
-                      "end": 680,
+                      "start": 659,
+                      "end": 663,
                       "loc": {
                         "start": {
-                          "line": 37,
+                          "line": 39,
                           "column": 7
                         },
                         "end": {
-                          "line": 37,
+                          "line": 39,
                           "column": 11
                         },
                         "identifierName": "data"
@@ -814,15 +446,15 @@
                   },
                   "property": {
                     "type": "Identifier",
-                    "start": 681,
-                    "end": 685,
+                    "start": 664,
+                    "end": 668,
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 39,
                         "column": 12
                       },
                       "end": {
-                        "line": 37,
+                        "line": 39,
                         "column": 16
                       },
                       "identifierName": "push"
@@ -834,15 +466,15 @@
                 "arguments": [
                   {
                     "type": "Identifier",
-                    "start": 686,
-                    "end": 687,
+                    "start": 669,
+                    "end": 670,
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 39,
                         "column": 17
                       },
                       "end": {
-                        "line": 37,
+                        "line": 39,
                         "column": 18
                       },
                       "identifierName": "i"
@@ -857,386 +489,18 @@
         },
         "leadingComments": [
           {
-            "type": "CommentLine",
-            "value": " tips.code = 0;",
-            "start": 66,
-            "end": 83,
+            "type": "CommentBlock",
+            "value": "\ntips.code = 0;\n  tips.msg = tips.data[0];\n\n  tips.data.push(tips.data[0] + tips.data[1]);\n\n\n  function add(a, b) {\n    return a + b;\n  }\n\n  tips.data.push(add(8880, 8));\n\n  tips.add = (a, b) => {\n    let tmp = a + b;\n    tips.data.push(tmp);\n  }\n\n  tips.add(9990, 9);\n  tips.add(1000, 9);\n  tips.length = tips.data.length;\n\n  tips.add(1000, 1 + 51 % 2 / 20);\n  tips.sum = 0;\n  let i = 0;\n  tips.data.forEach(element => {\n    i = i + 1;\n    tips.sum = tips.sum + element;\n  });\n// if else for map filter forEach\n// import\n// Math.round(), toFixed()\n\n",
+            "start": 68,
+            "end": 622,
             "loc": {
               "start": {
-                "line": 4,
+                "line": 3,
                 "column": 0
               },
               "end": {
-                "line": 4,
-                "column": 17
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.msg = tips.data[0];",
-            "start": 84,
-            "end": 111,
-            "loc": {
-              "start": {
-                "line": 5,
-                "column": 0
-              },
-              "end": {
-                "line": 5,
-                "column": 27
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.data.push(tips.data[0] + tips.data[1]);",
-            "start": 113,
-            "end": 160,
-            "loc": {
-              "start": {
-                "line": 7,
-                "column": 0
-              },
-              "end": {
-                "line": 7,
-                "column": 47
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " function add(a, b){",
-            "start": 163,
-            "end": 185,
-            "loc": {
-              "start": {
-                "line": 10,
-                "column": 0
-              },
-              "end": {
-                "line": 10,
-                "column": 22
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   return a + b;",
-            "start": 186,
-            "end": 204,
-            "loc": {
-              "start": {
-                "line": 11,
-                "column": 0
-              },
-              "end": {
-                "line": 11,
-                "column": 18
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " }",
-            "start": 205,
-            "end": 209,
-            "loc": {
-              "start": {
-                "line": 12,
-                "column": 0
-              },
-              "end": {
-                "line": 12,
-                "column": 4
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.data.push(add(8880, 8));",
-            "start": 211,
-            "end": 243,
-            "loc": {
-              "start": {
-                "line": 14,
-                "column": 0
-              },
-              "end": {
-                "line": 14,
-                "column": 32
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add = (a, b)=>{",
-            "start": 245,
-            "end": 268,
-            "loc": {
-              "start": {
-                "line": 16,
-                "column": 0
-              },
-              "end": {
-                "line": 16,
-                "column": 23
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   let tmp = a + b;",
-            "start": 269,
-            "end": 290,
-            "loc": {
-              "start": {
-                "line": 17,
-                "column": 0
-              },
-              "end": {
-                "line": 17,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   tips.data.push(tmp);",
-            "start": 291,
-            "end": 316,
-            "loc": {
-              "start": {
-                "line": 18,
-                "column": 0
-              },
-              "end": {
-                "line": 18,
-                "column": 25
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " }",
-            "start": 317,
-            "end": 321,
-            "loc": {
-              "start": {
-                "line": 19,
-                "column": 0
-              },
-              "end": {
-                "line": 19,
-                "column": 4
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add(9990, 9);",
-            "start": 323,
-            "end": 344,
-            "loc": {
-              "start": {
-                "line": 21,
-                "column": 0
-              },
-              "end": {
-                "line": 21,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add(1000, 9);",
-            "start": 345,
-            "end": 366,
-            "loc": {
-              "start": {
-                "line": 22,
-                "column": 0
-              },
-              "end": {
-                "line": 22,
-                "column": 21
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.length = tips.data.length;",
-            "start": 367,
-            "end": 401,
-            "loc": {
-              "start": {
-                "line": 23,
-                "column": 0
-              },
-              "end": {
-                "line": 23,
-                "column": 34
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.add(1000, 1 + 51%2 / 20);",
-            "start": 403,
-            "end": 436,
-            "loc": {
-              "start": {
-                "line": 25,
-                "column": 0
-              },
-              "end": {
-                "line": 25,
-                "column": 33
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " // if else for map filter forEach",
-            "start": 437,
-            "end": 473,
-            "loc": {
-              "start": {
-                "line": 26,
-                "column": 0
-              },
-              "end": {
-                "line": 26,
-                "column": 36
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " // import",
-            "start": 474,
-            "end": 486,
-            "loc": {
-              "start": {
-                "line": 27,
-                "column": 0
-              },
-              "end": {
-                "line": 27,
-                "column": 12
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " // Math.round(), toFixed()",
-            "start": 487,
-            "end": 516,
-            "loc": {
-              "start": {
-                "line": 28,
-                "column": 0
-              },
-              "end": {
-                "line": 28,
-                "column": 29
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.sum = 0;",
-            "start": 517,
-            "end": 533,
-            "loc": {
-              "start": {
-                "line": 29,
-                "column": 0
-              },
-              "end": {
-                "line": 29,
-                "column": 16
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " let i = 0;",
-            "start": 534,
-            "end": 547,
-            "loc": {
-              "start": {
-                "line": 30,
-                "column": 0
-              },
-              "end": {
-                "line": 30,
-                "column": 13
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " tips.data.forEach(element =>{",
-            "start": 548,
-            "end": 580,
-            "loc": {
-              "start": {
-                "line": 31,
-                "column": 0
-              },
-              "end": {
-                "line": 31,
-                "column": 32
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   i = i + 1;",
-            "start": 581,
-            "end": 596,
-            "loc": {
-              "start": {
-                "line": 32,
-                "column": 0
-              },
-              "end": {
-                "line": 32,
-                "column": 15
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": "   tips.sum = tips.sum + element;",
-            "start": 597,
-            "end": 632,
-            "loc": {
-              "start": {
-                "line": 33,
-                "column": 0
-              },
-              "end": {
-                "line": 33,
-                "column": 35
-              }
-            }
-          },
-          {
-            "type": "CommentLine",
-            "value": " });",
-            "start": 633,
-            "end": 639,
-            "loc": {
-              "start": {
-                "line": 34,
-                "column": 0
-              },
-              "end": {
-                "line": 34,
-                "column": 6
+                "line": 36,
+                "column": 2
               }
             }
           }
@@ -1263,386 +527,18 @@
       }
     },
     {
-      "type": "CommentLine",
-      "value": " tips.code = 0;",
-      "start": 66,
-      "end": 83,
+      "type": "CommentBlock",
+      "value": "\ntips.code = 0;\n  tips.msg = tips.data[0];\n\n  tips.data.push(tips.data[0] + tips.data[1]);\n\n\n  function add(a, b) {\n    return a + b;\n  }\n\n  tips.data.push(add(8880, 8));\n\n  tips.add = (a, b) => {\n    let tmp = a + b;\n    tips.data.push(tmp);\n  }\n\n  tips.add(9990, 9);\n  tips.add(1000, 9);\n  tips.length = tips.data.length;\n\n  tips.add(1000, 1 + 51 % 2 / 20);\n  tips.sum = 0;\n  let i = 0;\n  tips.data.forEach(element => {\n    i = i + 1;\n    tips.sum = tips.sum + element;\n  });\n// if else for map filter forEach\n// import\n// Math.round(), toFixed()\n\n",
+      "start": 68,
+      "end": 622,
       "loc": {
         "start": {
-          "line": 4,
+          "line": 3,
           "column": 0
         },
         "end": {
-          "line": 4,
-          "column": 17
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.msg = tips.data[0];",
-      "start": 84,
-      "end": 111,
-      "loc": {
-        "start": {
-          "line": 5,
-          "column": 0
-        },
-        "end": {
-          "line": 5,
-          "column": 27
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.data.push(tips.data[0] + tips.data[1]);",
-      "start": 113,
-      "end": 160,
-      "loc": {
-        "start": {
-          "line": 7,
-          "column": 0
-        },
-        "end": {
-          "line": 7,
-          "column": 47
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " function add(a, b){",
-      "start": 163,
-      "end": 185,
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 0
-        },
-        "end": {
-          "line": 10,
-          "column": 22
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "   return a + b;",
-      "start": 186,
-      "end": 204,
-      "loc": {
-        "start": {
-          "line": 11,
-          "column": 0
-        },
-        "end": {
-          "line": 11,
-          "column": 18
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " }",
-      "start": 205,
-      "end": 209,
-      "loc": {
-        "start": {
-          "line": 12,
-          "column": 0
-        },
-        "end": {
-          "line": 12,
-          "column": 4
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.data.push(add(8880, 8));",
-      "start": 211,
-      "end": 243,
-      "loc": {
-        "start": {
-          "line": 14,
-          "column": 0
-        },
-        "end": {
-          "line": 14,
-          "column": 32
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.add = (a, b)=>{",
-      "start": 245,
-      "end": 268,
-      "loc": {
-        "start": {
-          "line": 16,
-          "column": 0
-        },
-        "end": {
-          "line": 16,
-          "column": 23
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "   let tmp = a + b;",
-      "start": 269,
-      "end": 290,
-      "loc": {
-        "start": {
-          "line": 17,
-          "column": 0
-        },
-        "end": {
-          "line": 17,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "   tips.data.push(tmp);",
-      "start": 291,
-      "end": 316,
-      "loc": {
-        "start": {
-          "line": 18,
-          "column": 0
-        },
-        "end": {
-          "line": 18,
-          "column": 25
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " }",
-      "start": 317,
-      "end": 321,
-      "loc": {
-        "start": {
-          "line": 19,
-          "column": 0
-        },
-        "end": {
-          "line": 19,
-          "column": 4
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.add(9990, 9);",
-      "start": 323,
-      "end": 344,
-      "loc": {
-        "start": {
-          "line": 21,
-          "column": 0
-        },
-        "end": {
-          "line": 21,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.add(1000, 9);",
-      "start": 345,
-      "end": 366,
-      "loc": {
-        "start": {
-          "line": 22,
-          "column": 0
-        },
-        "end": {
-          "line": 22,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.length = tips.data.length;",
-      "start": 367,
-      "end": 401,
-      "loc": {
-        "start": {
-          "line": 23,
-          "column": 0
-        },
-        "end": {
-          "line": 23,
-          "column": 34
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.add(1000, 1 + 51%2 / 20);",
-      "start": 403,
-      "end": 436,
-      "loc": {
-        "start": {
-          "line": 25,
-          "column": 0
-        },
-        "end": {
-          "line": 25,
-          "column": 33
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " // if else for map filter forEach",
-      "start": 437,
-      "end": 473,
-      "loc": {
-        "start": {
-          "line": 26,
-          "column": 0
-        },
-        "end": {
-          "line": 26,
-          "column": 36
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " // import",
-      "start": 474,
-      "end": 486,
-      "loc": {
-        "start": {
-          "line": 27,
-          "column": 0
-        },
-        "end": {
-          "line": 27,
-          "column": 12
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " // Math.round(), toFixed()",
-      "start": 487,
-      "end": 516,
-      "loc": {
-        "start": {
-          "line": 28,
-          "column": 0
-        },
-        "end": {
-          "line": 28,
-          "column": 29
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.sum = 0;",
-      "start": 517,
-      "end": 533,
-      "loc": {
-        "start": {
-          "line": 29,
-          "column": 0
-        },
-        "end": {
-          "line": 29,
-          "column": 16
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " let i = 0;",
-      "start": 534,
-      "end": 547,
-      "loc": {
-        "start": {
-          "line": 30,
-          "column": 0
-        },
-        "end": {
-          "line": 30,
-          "column": 13
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " tips.data.forEach(element =>{",
-      "start": 548,
-      "end": 580,
-      "loc": {
-        "start": {
-          "line": 31,
-          "column": 0
-        },
-        "end": {
-          "line": 31,
-          "column": 32
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "   i = i + 1;",
-      "start": 581,
-      "end": 596,
-      "loc": {
-        "start": {
-          "line": 32,
-          "column": 0
-        },
-        "end": {
-          "line": 32,
-          "column": 15
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "   tips.sum = tips.sum + element;",
-      "start": 597,
-      "end": 632,
-      "loc": {
-        "start": {
-          "line": 33,
-          "column": 0
-        },
-        "end": {
-          "line": 33,
-          "column": 35
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": " });",
-      "start": 633,
-      "end": 639,
-      "loc": {
-        "start": {
-          "line": 34,
-          "column": 0
-        },
-        "end": {
-          "line": 34,
-          "column": 6
+          "line": 36,
+          "column": 2
         }
       }
     }
