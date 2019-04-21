@@ -4,7 +4,6 @@ package org.qiuer;
 import org.qiuer.ast.Program;
 import org.qiuer.core.ASTParser;
 import org.qiuer.core.ASTRunner;
-import org.qiuer.exception.EReturn;
 import org.qiuer.util.JsonUtil;
 
 import java.io.BufferedReader;
@@ -40,7 +39,7 @@ public class Application {
     System.out.println("=======================================================");
     start = System.currentTimeMillis();
     List<Integer> a = new ArrayList<>();
-    for (int i = 0; i < 10000; i++){
+    for (int i = 0; i < 1000000; i++){
       a.add(i);
     }
     System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));

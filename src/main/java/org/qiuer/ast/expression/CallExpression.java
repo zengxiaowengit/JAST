@@ -1,13 +1,11 @@
 package org.qiuer.ast.expression;
 
-import org.apache.commons.lang.StringUtils;
 import org.qiuer.ast.expression.function.ArrowFunctionExpression;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
 import org.qiuer.exception.*;
-import org.qiuer.util.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,7 @@ public class CallExpression extends Expression {
           Object value;
           if (argument instanceof ArrowFunctionExpression) value = argument; //箭头函数作为参数，只是定义。不做调用。
           else value = argument.run(context);
-          context.updateVariable(((Identifier) param).name, value);
+          context.declareVariable(((Identifier) param).name, value, "let");
         } else {
           throw new ERuntime(1000, "函数定义的参数名称只能是简单的标识符Identifier");
         }

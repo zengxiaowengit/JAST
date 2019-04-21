@@ -3,7 +3,7 @@ package org.qiuer.exception;
 import java.util.List;
 import java.util.Map;
 
-public class EValidate {
+public final class EValidate {
 
   public static <T> T cast(Object object, Class<? extends T> clazz) throws ERuntime {
     if(clazz.isAssignableFrom(object.getClass())){//子类放后边。
@@ -34,6 +34,12 @@ public class EValidate {
   public static void assertTrue(boolean flag, String msg) throws ERuntime {
     if (!flag){
       throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR,msg);
+    }
+  }
+
+  public static void assertType(Object object, Class clazz, String msg) throws ERuntime {
+    if (!clazz.isAssignableFrom(object.getClass())){
+      throw new ERuntime(Const.EXCEPTION.TYPE_CAST_ERROR,msg);
     }
   }
 }

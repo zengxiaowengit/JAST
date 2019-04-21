@@ -3,6 +3,7 @@ package org.qiuer.ast.expression;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.ast.expression.function.SystemFunction;
 import org.qiuer.core.Context;
+import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class MemberExpression extends AbstractAssignPathExpression{
 
   @Override
   public void compile() throws IException {
-
+    EValidate.notEmpty(object);
+    EValidate.notEmpty(property);
   }
 
   @Override

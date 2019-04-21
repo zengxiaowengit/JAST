@@ -1,20 +1,19 @@
 package org.qiuer.ast.statement;
 
 import org.qiuer.core.Context;
-import org.qiuer.exception.Const;
-import org.qiuer.exception.EReturn;
-import org.qiuer.exception.ERuntime;
-import org.qiuer.exception.IException;
+import org.qiuer.exception.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlockStatement extends Statement {
-  String type = "BlockStatement";
-  List<IStatement> body;
+  public String type = "BlockStatement";
+  public List<IStatement> body;
 
   @Override
   public void compile() throws IException {
-
+    if (body == null)
+      body = new ArrayList<>();
   }
 
   @Override
@@ -24,9 +23,7 @@ public class BlockStatement extends Statement {
       for (IStatement statement : body) {
         statement.run(context);
       }
-    }catch (EReturn eReturn){
-      return eReturn.getObject();
-    }catch (IException e){
+    }catch (IException e){//EReturn 由CallExpression catch。
       throw e;
     }catch (Exception e){
       throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());

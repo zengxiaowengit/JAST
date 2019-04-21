@@ -33,7 +33,6 @@ public class FunctionContext extends AbstractRuntimeContext<String, Function> {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 
   /**
@@ -94,3 +93,4 @@ public class FunctionContext extends AbstractRuntimeContext<String, Function> {
   }
 
 }
+

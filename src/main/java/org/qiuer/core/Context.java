@@ -23,7 +23,8 @@ public class Context{
   }
 
   public void declareVariable(String key, Object value, String kind) {
-    variableContext.update(key, value);
+    variableContext.create(key, value);
+    //TODO kind处理一下。create到assignContext
   }
 
   public Object getVariableValue(String key) {

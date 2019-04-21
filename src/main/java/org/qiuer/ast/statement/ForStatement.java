@@ -16,13 +16,12 @@ public class ForStatement extends Statement {
   public void compile() throws IException {
     EValidate.notNull(test);
     EValidate.notNull(update);
+    if(init == null) init = new EmptyStatement();
+    if(body == null) body = new EmptyStatement();
   }
 
   @Override
   public Object run(Context context) throws IException {
-    if(init == null){
-      init = new EmptyStatement();
-    }
     for (init.run(context); EValidate.cast(test.run(context), Boolean.class); update.run(context)){
       body.run(context);
     }
