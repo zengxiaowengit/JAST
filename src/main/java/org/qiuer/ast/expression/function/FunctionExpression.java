@@ -1,7 +1,8 @@
 package org.qiuer.ast.expression.function;
 
-import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
+import org.qiuer.exception.Const;
+import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
@@ -18,17 +19,14 @@ public class FunctionExpression extends Function{
   public Object run(Context context) throws IException {
     context.enterBlock();
     try {
-      for (IPattern param : this.params) {
-
-      }
       return this.body.run(context);
     }catch (IException e){
       throw e;
     }catch (Exception e){
-
+      e.printStackTrace();
+      throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());
     }finally {
       context.exitBlock();
     }
-    return null;
   }
 }
