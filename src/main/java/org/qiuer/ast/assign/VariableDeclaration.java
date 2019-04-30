@@ -8,8 +8,8 @@ import java.util.List;
 
 public class VariableDeclaration extends Declaration {
 
-    String type = "VariableDeclaration";
-    List<VariableDeclarator> declarations;
+    public String type = "VariableDeclaration";
+    public List<VariableDeclarator> declarations;
     // "var" | "let" | "const";
     String kind;
 

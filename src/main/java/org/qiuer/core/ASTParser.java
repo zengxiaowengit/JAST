@@ -4,6 +4,7 @@ import org.qiuer.ast.INode;
 import org.qiuer.ast.Program;
 import org.qiuer.util.JsonUtil;
 import org.reflections.Reflections;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
 /**
  * json转化为抽象语法树（Abstract Syntax Tree）
  */
+@Component
 public class ASTParser {
   //反序列化的java类型映射。
   private static HashMap<String, Class> typeMapping = new HashMap<String, Class>();

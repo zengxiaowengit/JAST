@@ -72,19 +72,19 @@ abstract class BinaryOperation<T>{
   public abstract boolean LESS_EQUAL(Object left, Object right) throws ERuntime ;
   public abstract boolean GREAT(Object left, Object right) throws ERuntime ;
   public abstract boolean GREAT_EQUAL(Object left, Object right) throws ERuntime ;
+  public abstract T PLUS(Object left, Object right) throws ERuntime;
   public abstract T MINUS(Object left, Object right) throws ERuntime;
   public abstract T MULTIPLY(Object left, Object right) throws ERuntime;
   public abstract BigDecimal DIVIDE(Object left, Object right) throws ERuntime;
   public abstract T MOD(Object left, Object right) throws ERuntime;
 //  public abstract void LEFT_SHIFT(Object left, Object right) throws ERuntime ;
+
 //  public abstract void RIGHT_SHIFT(Object left, Object right) throws ERuntime ;
 
   protected static final int DIVIDE_SCALE = 10;
-
   public BigDecimal DivideDecimal(BigDecimal a, BigDecimal b){
     return a.divide(b, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
   }
-  public abstract T PLUS(Object left, Object right) throws ERuntime;
 
   protected BigDecimal toBigDecimal(Object object) throws ERuntime {
     if(object instanceof BigDecimal){

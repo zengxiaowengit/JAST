@@ -11,9 +11,9 @@ import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.IException;
 
 public class VariableDeclarator extends Node {
-  String type = "VariableDeclarator";
-  IPattern id;
-  Expression init;
+  public String type = "VariableDeclarator";
+  public IPattern id;
+  public Expression init;
 
   @Override
   public void compile() throws IException {

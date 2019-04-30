@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Application {
+public class TestApplication {
 
   public static void main(String[] args) throws IOException, Exception {
     InputStream stream = ASTParser.class.getResourceAsStream("/ast.json");
@@ -40,7 +40,7 @@ public class Application {
     start = System.currentTimeMillis();
     List<Integer> a = new ArrayList<>();
     for (int i = 0; i < 1000000; i++){
-      a.add(i);
+//      a.add(i);
     }
     System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
 

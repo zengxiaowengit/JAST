@@ -3,6 +3,7 @@ package org.qiuer.ast.assign;
 import org.qiuer.ast.expression.function.CustomFunction;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.core.Context;
+import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
 public class FunctionDeclaration extends Function implements IDeclaration {
@@ -10,7 +11,9 @@ public class FunctionDeclaration extends Function implements IDeclaration {
 
   @Override
   public void compile() throws IException {
-    super.compile();
+    EValidate.notNull(id);
+    EValidate.notNull(params);
+    EValidate.notNull(body);
   }
 
   @Override

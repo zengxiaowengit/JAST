@@ -8,11 +8,12 @@ import org.qiuer.exception.IException;
  * 在js代码里，使用者自己写的通过function aaa() { ... } 定义的函数。
  */
 public class CustomFunction extends Function {
+  public String type = "CustomFunction";
 
   @Override
   public void compile() throws IException {
-    super.compile();
     EValidate.notNull(id);
+    EValidate.notNull(body);
   }
 
   @Override

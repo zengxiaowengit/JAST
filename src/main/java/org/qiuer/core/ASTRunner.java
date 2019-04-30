@@ -3,7 +3,9 @@ package org.qiuer.core;
 import org.qiuer.ast.Program;
 import org.qiuer.exception.EReturn;
 import org.qiuer.exception.IException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ASTRunner {
 
   public static Object run(Program program){

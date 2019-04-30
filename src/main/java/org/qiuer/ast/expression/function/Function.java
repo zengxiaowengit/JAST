@@ -20,9 +20,4 @@ public abstract class Function extends Expression{
   public INode body; // BlockStatement || Expression
   public boolean generator;
   public boolean expression;
-
-  @Override
-  public void compile() throws IException {
-    EValidate.notNull(body);
-  }
 }

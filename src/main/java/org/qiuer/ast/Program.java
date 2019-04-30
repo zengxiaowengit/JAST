@@ -26,7 +26,7 @@ public class Program extends Node {
       for (IStatement statement : body){
         statement.run(context);
       }
-//      System.out.println(JsonUtil.toPrettyJson(context));
+      //System.out.println(JsonUtil.toPrettyJson(context));
     }catch (EReturn eReturn){
       return eReturn;
     }catch (IException e1) {

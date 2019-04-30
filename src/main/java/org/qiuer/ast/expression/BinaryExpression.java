@@ -14,10 +14,9 @@ public class BinaryExpression extends Expression {
   public IExpression left;
   public IExpression right;
 
-  public BinaryOperator binaryOperator;
-
-  protected static LongBinaryOperation longBinaryOperation = new LongBinaryOperation();
-  protected static BigDecimalBinaryOperation decimalBinaryOperation = new BigDecimalBinaryOperation();
+  private BinaryOperator binaryOperator;
+  private LongBinaryOperation longBinaryOperation = new LongBinaryOperation();
+  private BigDecimalBinaryOperation decimalBinaryOperation = new BigDecimalBinaryOperation();
 
   @Override
   public void compile() throws IException {
@@ -25,6 +24,7 @@ public class BinaryExpression extends Expression {
     EValidate.notNull(left);
     EValidate.notNull(right);
     binaryOperator = BinaryOperator.parse(operator);
+    //TODO 这里做改造。编译时知道操作符。但是不知道类型。操作符提前准备好。
   }
 
   @Override
@@ -57,7 +57,7 @@ public class BinaryExpression extends Expression {
   protected BinaryOperation getOperation(Object a, Object b) throws ERuntime {
     if(a instanceof Long && b instanceof Long){
       return longBinaryOperation;
-    }else if(b instanceof BigDecimal || b instanceof BigDecimal){
+    }else if(a instanceof BigDecimal || b instanceof BigDecimal){
       return decimalBinaryOperation;
     }else {
       throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "暂不支持" + a.getClass().getSimpleName()
