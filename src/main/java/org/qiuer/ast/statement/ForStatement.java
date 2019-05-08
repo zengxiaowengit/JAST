@@ -18,14 +18,19 @@ public class ForStatement extends Statement {
     EValidate.notNull(test);
     EValidate.notNull(update);
     if(init == null) init = new EmptyStatement();
-    if(body == null) body = new EmptyStatement();
+    if(body == null)
+      body = new EmptyStatement();
+    else if (body instanceof BlockStatement)
+      ((BlockStatement) body).needScope = false;
   }
 
   @Override
   public Object run(Context context) throws IException {
+    context.enterScope();
     for (init.run(context); EValidate.cast(test.run(context), Boolean.class); update.run(context)){
       body.run(context);
     }
+    context.exitScope();
     return null;
     /*init.run(context);
     long start = System.currentTimeMillis();

@@ -24,19 +24,23 @@ public class MemberExpression extends AbstractAssignPathExpression{
 
   @Override
   public Object run(Context context) throws IException {
-    List<String> path = new ArrayList<>();
-    object.addMemberPath(path);
-    property.addMemberPath(path);
-    Object ret = object.getVariableValue(context, path);
-    if(ret instanceof SystemFunction && ((SystemFunction) ret).allowPropCall()){//特例，通过属性访问的函数。
-      SystemFunction function = (SystemFunction) ret;
-      List<IExpression> arguments = new ArrayList<>();
-      arguments.add(this.object);
-      CallExpression callExpression = new CallExpression(function, arguments);
-      callExpression.compile();
-      return callExpression.run(context);
+    if(object instanceof AbstractAssignPathExpression){
+      AbstractAssignPathExpression o = (AbstractAssignPathExpression) object;
+      List<String> path = new ArrayList<>();
+      o.addMemberPath(path);
+      property.addMemberPath(path);
+      Object ret = o.getVariableValue(context, path);
+      if(ret instanceof SystemFunction && ((SystemFunction) ret).allowPropCall()){//特例，通过属性访问的函数。
+        SystemFunction function = (SystemFunction) ret;
+        List<IExpression> arguments = new ArrayList<>();
+        arguments.add(this.object);
+        CallExpression callExpression = new CallExpression(function, arguments);
+        callExpression.compile();
+        return callExpression.run(context);
+      }
+      return ret;
     }
-    return ret;
+    return null;
   }
 
   @Override

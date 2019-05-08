@@ -8,22 +8,31 @@ import java.util.List;
 
 public class VariableDeclaration extends Declaration {
 
-    public String type = "VariableDeclaration";
-    public List<VariableDeclarator> declarations;
-    // "var" | "let" | "const";
-    String kind;
+  public String type = "VariableDeclaration";
+  public List<VariableDeclarator> declarations;
+  // "var" | "let" | "const";
+  String kind;
 
-    @Override
-    public void compile() throws IException {
-
+  @Override
+  public void compile() throws IException {
+    AssignKind assignKind;
+    if ("const".equals(kind)) {
+      assignKind = AssignKind.CONST;
+    }else{
+      assignKind = AssignKind.LET;
     }
 
-    @Override
-    public Object run(Context context) throws IException {
-        //TODO 如果是const，需要做点什么。此处暂不考虑。
-        for (VariableDeclarator declarator: declarations){
-            declarator.run(context);
-        }
-        return null;
+    for (VariableDeclarator declaration : declarations) {
+      declaration.assignKind = assignKind;
     }
+  }
+
+  @Override
+  public Object run(Context context) throws IException {
+    //TODO 如果是const，需要做点什么。此处暂不考虑。
+    for (VariableDeclarator declarator : declarations) {
+      declarator.run(context);
+    }
+    return null;
+  }
 }

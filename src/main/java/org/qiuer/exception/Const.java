@@ -16,7 +16,8 @@ public interface Const {
     int CANNOT_BE_NULL = 15;
     // 不能为空
     int CANNOT_BE_EMPTY = 16;
-
+    // 参数太多
+    int TOO_MANY_ARGUMENTS = 17;
 
     //////////////////////以下为框架异常//////////////////////////
 

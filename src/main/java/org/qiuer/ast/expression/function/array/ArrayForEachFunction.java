@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression.function.array;
 
+import org.qiuer.ast.assign.AssignKind;
 import org.qiuer.ast.expression.CallExpression;
 import org.qiuer.ast.expression.IExpression;
 import org.qiuer.ast.expression.Identifier;
@@ -22,12 +23,16 @@ import java.util.List;
 public class ArrayForEachFunction extends SystemFunction {
   public String type = "ArrayForEachFunction";
 
+  private List<IExpression> supportedArguments = new ArrayList<>();
   @Override
   public void compile() {
     this.id = new Identifier("forEach");
     this.params = new ArrayList<>();
-    this.params.add(new Identifier("list"));
-    this.params.add(new Identifier("function"));
+    this.params.add(new Identifier("_list"));
+    this.params.add(new Identifier("_func"));
+
+    this.supportedArguments.add(new Identifier("_item"));
+    this.supportedArguments.add(new Identifier("_index"));
   }
 
   @Override
@@ -35,20 +40,15 @@ public class ArrayForEachFunction extends SystemFunction {
     if(this.params != null && this.params.size() == 2){
       List<Object> list = EValidate.cast(this.params.get(0).run(context), List.class);
       ArrowFunctionExpression function = EValidate.cast(this.params.get(1).run(context), ArrowFunctionExpression.class);
+
+      long index = 0;
       for (Object item : list) {
-        //TODO 这里的代码和CallExpression的代码很像。怎么改造一下。
-        List<IExpression> arguments = new ArrayList<>();
-        if (function.params.size() > 0) {
-          IPattern param1 = function.params.get(0);
-          if (param1 instanceof Identifier) {
-            arguments.add((Identifier) param1);
-            context.updateVariable(((Identifier) param1).name, item);
-          } else
-            throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION, "箭头函数的参数名称只能是简单标识符");
-        }
-        CallExpression callExpression = new CallExpression(function, arguments);
+        context.declareVariable("_item", item, AssignKind.CONST);
+        context.declareVariable("_index", index, AssignKind.CONST);
+        CallExpression callExpression = new CallExpression(function, supportedArguments.subList(0, function.params.size()));
         callExpression.compile();
         callExpression.run(context);
+        index++;
       }
     }else {
       throw new ERuntime(Const.EXCEPTION.WRONG_PARAMS_ON_CALL,"调用" + this.type + "函数参数错误：" + JsonUtil.toJson(this.params));

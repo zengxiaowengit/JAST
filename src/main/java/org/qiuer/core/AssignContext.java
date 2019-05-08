@@ -9,8 +9,11 @@ public class AssignContext extends AbstractRuntimeContext<String, AssignKind> {
 
   //是否可修改。
   public boolean isModifiable(String key){
-    //TODO 还未实现呢。
-    return true;
+    AssignKind assignKind = super.get(key);
+    if(assignKind == null){
+      return true;
+    }else
+      return !assignKind.equals(AssignKind.CONST);
   }
 
 }

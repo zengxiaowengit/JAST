@@ -1,11 +1,13 @@
 package org.qiuer.ast.expression.function;
 
 import org.qiuer.ast.INode;
+import org.qiuer.ast.assign.AssignKind;
 import org.qiuer.ast.expression.Expression;
 import org.qiuer.ast.expression.IExpression;
 import org.qiuer.ast.expression.Identifier;
 import org.qiuer.ast.pattern.IPattern;
 import org.qiuer.core.Context;
+import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
@@ -25,6 +27,9 @@ public abstract class Function extends Expression{
 
   public void prepareParams(Context context, List<IExpression> arguments) throws IException {
     int size = arguments.size();
+    // 给的参数比定义的多，报错
+    if(size > params.size())
+      throw new ERuntime(Const.EXCEPTION.TOO_MANY_ARGUMENTS, "调用函数：" + id.name + "传入太多参数");
     // 初始化函数的参数
     for (int i = 0; i < size; i++) {
       IPattern param = this.params.get(i);
@@ -34,9 +39,9 @@ public abstract class Function extends Expression{
         //函数作为参数，只是定义。不做调用。
         if (argument instanceof ArrowFunctionExpression || argument instanceof FunctionExpression) value = argument;
         else value = argument.run(context);
-        context.declareVariable(((Identifier) param).name, value, "let");
+        context.declareVariable(((Identifier) param).name, value, AssignKind.CONST);
       } else {
-        throw new ERuntime(1000, "函数定义的参数名称只能是简单的标识符Identifier");
+        throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, "函数: " + id.name + "定义的参数名称只能是简单的标识符Identifier");
       }
     }
   }

@@ -7,6 +7,7 @@ public abstract class IException extends Exception{
   public IException(){}
 
   public IException(int code, String msg) {
+    super(msg);
     this.code = code;
     this.msg = msg;
   }

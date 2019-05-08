@@ -12,9 +12,9 @@ public interface IRuntimeContext<K, V> {
 
   Object get(K key);
 
-  void enterBlock();
+  void enterScope();
 
-  void exitBlock();
+  void exitScope();
 
   // 这里返回的是不可修改的map。修改值要从update接口。
   Map<K, V> getCurrentContext();

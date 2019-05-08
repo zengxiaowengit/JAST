@@ -1,5 +1,6 @@
 package org.qiuer.ast.expression.function;
 
+import org.qiuer.ast.statement.BlockStatement;
 import org.qiuer.core.Context;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
@@ -13,11 +14,14 @@ public class FunctionExpression extends Function{
   public void compile() throws IException {
     EValidate.notNull(params);
     EValidate.notNull(body);
+    if(body instanceof BlockStatement){ //使用函数的scope。
+      ((BlockStatement) body).needScope = false;
+    }
   }
 
   @Override
   public Object run(Context context) throws IException {
-    context.enterBlock();
+    context.enterScope();
     try {
       return this.body.run(context);
     }catch (IException e){
@@ -26,7 +30,7 @@ public class FunctionExpression extends Function{
       e.printStackTrace();
       throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());
     }finally {
-      context.exitBlock();
+      context.exitScope();
     }
   }
 }

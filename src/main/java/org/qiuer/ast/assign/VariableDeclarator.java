@@ -15,6 +15,8 @@ public class VariableDeclarator extends Node {
   public IPattern id;
   public Expression init;
 
+  public AssignKind assignKind = AssignKind.LET;
+
   @Override
   public void compile() throws IException {
 
@@ -26,7 +28,7 @@ public class VariableDeclarator extends Node {
       if(init instanceof Function){
         context.declareFunction(((Identifier) id).name, (Function) init);
       }else
-        context.declareVariable(((Identifier) id).name, init.run(context), "let");
+        context.declareVariable(((Identifier) id).name, init.run(context), assignKind);
     } else {
       throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION, "不支持的表达式：" + type);
     }

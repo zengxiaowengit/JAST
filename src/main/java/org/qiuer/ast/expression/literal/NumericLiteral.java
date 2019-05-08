@@ -12,7 +12,10 @@ public class NumericLiteral extends Literal {
   public Object value;
 
   public NumericLiteral(){}
-  public NumericLiteral(Number value){ this.value = value; }
+  public NumericLiteral(Number value) throws IException {
+    this.value = value;
+    this.compile();
+  }
 
   @Override
   public void compile() throws IException {

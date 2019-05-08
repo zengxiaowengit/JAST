@@ -10,6 +10,9 @@ public class BlockStatement extends Statement {
   public String type = "BlockStatement";
   public List<IStatement> body;
 
+
+  public boolean needScope = true; //单独的block需要新的scope。函数调用等某些场景不需要。可以优化效率。
+
   @Override
   public void compile() throws IException {
     if (body == null)
@@ -18,18 +21,15 @@ public class BlockStatement extends Statement {
 
   @Override
   public Object run(Context context) throws IException {
-    context.enterBlock();
-    try {
-      for (IStatement statement : body) {
-        statement.run(context);
-      }
-    }catch (IException e){//EReturn 由CallExpression catch。
-      throw e;
-    }catch (Exception e){
-      throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());
-    }finally {
-      context.exitBlock();
+    if(needScope)
+      context.enterScope();
+
+    for (IStatement statement : body) {
+      statement.run(context);
     }
+
+    if (needScope)
+      context.exitScope();
     return null;
   }
 }

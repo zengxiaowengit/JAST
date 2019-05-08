@@ -30,7 +30,7 @@ public class CallExpression extends Expression {
 
   @Override
   public Object run(Context context) throws IException {
-    context.enterBlock();
+    context.enterScope();
     try {
       Function function;
       if(callee instanceof MemberExpression) function = ((MemberExpression) callee).getFunction(context);
@@ -39,7 +39,7 @@ public class CallExpression extends Expression {
       else throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "函数调用只支持标识符和成员函数调用");
       EValidate.notNull(function);
       beforeRun(function);
-      EValidate.assertTrue(function.params.size() == arguments.size(), "函数调用参数个数必须和函数定义参数个数相同");
+//      EValidate.assertTrue(function.params.size() == arguments.size(), "函数调用参数个数必须和函数定义参数个数相同");
 
       function.prepareParams(context, arguments);
       //调用函数
@@ -49,9 +49,10 @@ public class CallExpression extends Expression {
     }catch (IException e) {
       throw e;
     } catch (Exception e) {
+      e.printStackTrace();
       throw new ERuntime(Const.EXCEPTION.UNKNOWN_ERROR, e.getMessage());
     }finally {
-      context.exitBlock();
+      context.exitScope();
     }
   }
 

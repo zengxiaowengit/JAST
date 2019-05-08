@@ -21,8 +21,7 @@ public class Program extends Node {
   @Override
   public Object run(Context context) throws IException {
     try {
-      context.enterBlock();
-      //到时候put一些全局变量进去。如：JSON.parse()
+      context.enterScope();
       for (IStatement statement : body){
         statement.run(context);
       }
@@ -35,7 +34,7 @@ public class Program extends Node {
       e2.printStackTrace();
       throw new EReturn(Const.EXCEPTION.UNKNOWN_ERROR, e2.getMessage() == null? "未知错误" : e2.getMessage(), null);
     }finally {
-      context.exitBlock();
+      context.exitScope();
     }
     return null;
   }

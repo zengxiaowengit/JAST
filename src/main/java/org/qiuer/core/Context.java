@@ -1,5 +1,6 @@
 package org.qiuer.core;
 
+import org.qiuer.ast.assign.AssignKind;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.exception.Const;
 import org.qiuer.exception.ERuntime;
@@ -22,9 +23,9 @@ public class Context{
       throw new ERuntime(Const.EXCEPTION.VARIABLE_CANNOT_MODIFIED, "变量不可修改:" + key);
   }
 
-  public void declareVariable(String key, Object value, String kind) {
+  public void declareVariable(String key, Object value, AssignKind kind) {
     variableContext.create(key, value);
-    //TODO kind处理一下。create到assignContext
+    assignContext.create(key, kind);
   }
 
   public Object getVariableValue(String key) {
@@ -43,16 +44,16 @@ public class Context{
     functionContext.create(key, value);
   }
 
-  public void enterBlock() {
-    assignContext.enterBlock();
-    variableContext.enterBlock();
-    functionContext.enterBlock();
+  public void enterScope() {
+    assignContext.enterScope();
+    variableContext.enterScope();
+    functionContext.enterScope();
   }
 
-  public void exitBlock() {
-    assignContext.exitBlock();
-    variableContext.exitBlock();
-    functionContext.exitBlock();
+  public void exitScope() {
+    assignContext.exitScope();
+    variableContext.exitScope();
+    functionContext.exitScope();
   }
 
   public Map<String, Object> getCurrentContext() {
