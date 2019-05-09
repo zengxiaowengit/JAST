@@ -1,6 +1,7 @@
 package org.qiuer.ast.expression.function;
 
 public abstract class SystemFunction extends Function {
+  public String type = this.getClass().getSimpleName();
   /**
    * 注册到某个类型上，通过成员函数的方式访问。
    * 注意：不通过成员函数访问的，返回null。

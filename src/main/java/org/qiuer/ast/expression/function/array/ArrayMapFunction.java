@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  * list.push(element)
  */
 public class ArrayMapFunction extends SystemFunction {
-  public String type = "ArrayMapFunction";
 
   private List<IExpression> supportedArguments = new ArrayList<>();
   @Override

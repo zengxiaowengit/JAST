@@ -23,7 +23,7 @@ public class BooleanLiteral extends Literal {
   }
 
   @Override
-  public void addMemberPath(List<String> path) throws IException {
-    throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, type + "不支持访问");
+  public Object getValue() {
+    return value;
   }
 }

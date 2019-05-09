@@ -1,11 +1,7 @@
 package org.qiuer.ast.expression.literal;
 
 import org.qiuer.core.Context;
-import org.qiuer.exception.Const;
-import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.IException;
-
-import java.util.List;
 
 public class NullLiteral extends Literal {
   public String type = "NullLiteral";
@@ -20,7 +16,7 @@ public class NullLiteral extends Literal {
   }
 
   @Override
-  public void addMemberPath(List<String> path) throws IException {
-    throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, type + "不支持访问");
+  public Object getValue() {
+    return null;
   }
 }

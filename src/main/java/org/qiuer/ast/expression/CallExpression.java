@@ -34,7 +34,7 @@ public class CallExpression extends Expression {
     try {
       Function function;
       if(callee instanceof MemberExpression) function = ((MemberExpression) callee).getFunction(context);
-      else if(callee instanceof Identifier) function = ((Identifier) callee).getFunction(context);
+      else if(callee instanceof Identifier) function = context.getFunction(((Identifier) callee).name);
       else if (callee instanceof Function) function = (Function) callee;
       else throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "函数调用只支持标识符和成员函数调用");
       EValidate.notNull(function);

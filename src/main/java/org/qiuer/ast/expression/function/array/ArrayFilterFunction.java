@@ -18,7 +18,6 @@ import java.util.List;
  * list.push(element)
  */
 public class ArrayFilterFunction extends SystemFunction {
-  public String type = "ArrayFilterFunction";
 
   private List<IExpression> supportedArguments = new ArrayList<>();
   @Override
@@ -46,7 +45,7 @@ public class ArrayFilterFunction extends SystemFunction {
       CallExpression callExpression = new CallExpression(function, supportedArguments.subList(0, function.params.size()));
       callExpression.compile();
       if(EValidate.cast(callExpression.run(context), Boolean.class)){
-        result.add(callExpression.run(context));
+        result.add(item);
       }
       index++;
     }

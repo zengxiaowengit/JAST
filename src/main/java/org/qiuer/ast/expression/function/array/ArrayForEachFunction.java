@@ -21,7 +21,6 @@ import java.util.List;
  * list.push(element)
  */
 public class ArrayForEachFunction extends SystemFunction {
-  public String type = "ArrayForEachFunction";
 
   private List<IExpression> supportedArguments = new ArrayList<>();
   @Override

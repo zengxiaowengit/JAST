@@ -29,7 +29,6 @@ public class VariableDeclaration extends Declaration {
 
   @Override
   public Object run(Context context) throws IException {
-    //TODO 如果是const，需要做点什么。此处暂不考虑。
     for (VariableDeclarator declarator : declarations) {
       declarator.run(context);
     }

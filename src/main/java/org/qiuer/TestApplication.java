@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,29 @@ public class TestApplication {
     }
     System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
 
+  }
 
+  static class Main{
+    public static void main(String[] args) {
+      long start = System.currentTimeMillis();
+
+      List<Object> list = new ArrayList<>();
+      for (int i = 0; i <= 1000000; i++){
+        list.add(i);
+      }
+
+      System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
+    }
+  }
+}
+class Main{
+
+  public static void main(String[] args){
+    long start = System.currentTimeMillis();
+    for (int i = 0; i <= 1000000; i++){
+      System.currentTimeMillis();
+    }
+
+    System.out.println("耗时(ms)：" + (System.currentTimeMillis() - start));
   }
 }

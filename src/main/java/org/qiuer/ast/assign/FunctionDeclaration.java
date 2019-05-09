@@ -1,6 +1,6 @@
 package org.qiuer.ast.assign;
 
-import org.qiuer.ast.expression.function.CustomFunction;
+import org.qiuer.ast.expression.function.UserDefineFunction;
 import org.qiuer.ast.expression.function.Function;
 import org.qiuer.core.Context;
 import org.qiuer.exception.EValidate;
@@ -18,7 +18,7 @@ public class FunctionDeclaration extends Function implements IDeclaration {
 
   @Override
   public Object run(Context context) throws IException {
-    Function function =  new CustomFunction();
+    Function function =  new UserDefineFunction();
     function.id = this.id;
     function.params = this.params;
     function.body = this.body;

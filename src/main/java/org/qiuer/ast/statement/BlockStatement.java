@@ -24,12 +24,14 @@ public class BlockStatement extends Statement {
     if(needScope)
       context.enterScope();
 
-    for (IStatement statement : body) {
-      statement.run(context);
+    try {
+      for (IStatement statement : body) {
+        statement.run(context);
+      }
+    } finally {
+      if (needScope)
+        context.exitScope();
     }
-
-    if (needScope)
-      context.exitScope();
     return null;
   }
 }

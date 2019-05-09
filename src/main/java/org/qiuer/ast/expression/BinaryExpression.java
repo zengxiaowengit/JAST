@@ -15,8 +15,6 @@ public class BinaryExpression extends Expression {
   public IExpression right;
 
   private BinaryOperator binaryOperator;
-  private LongBinaryOperation longBinaryOperation = new LongBinaryOperation();
-  private BigDecimalBinaryOperation decimalBinaryOperation = new BigDecimalBinaryOperation();
 
   @Override
   public void compile() throws IException {
@@ -34,20 +32,15 @@ public class BinaryExpression extends Expression {
 
     BinaryOperation operation = getOperation(a, b);
     switch (binaryOperator){
-      case PLUS: return operation.PLUS(a, b);
-      case MINUS: return operation.MINUS(a, b);
-      case MULTIPLY:  return operation.MULTIPLY(a, b);
-      case DIVIDE:
-        BigDecimal ret = operation.DIVIDE(a, b);
-        if(ret.compareTo(new BigDecimal(ret.longValue())) == 0){//能除尽。返回long。
-          return ret.longValue();
-        }else
-          return ret;
-      case MOD: return operation.MOD(a, b);
-      case LESS: return operation.LESS(a, b);
-      case LESS_EQUAL:return operation.LESS_EQUAL(a, b);
-      case GREAT: return operation.GREAT(a, b);
-      case GREAT_EQUAL: return operation.GREAT_EQUAL(a, b);
+      case PLUS: return operation.PLUS();
+      case MINUS: return operation.MINUS();
+      case MULTIPLY: return operation.MULTIPLY();
+      case DIVIDE: return operation.DIVIDE();
+      case MOD: return operation.MOD();
+      case LESS: return operation.LESS();
+      case LESS_EQUAL:return operation.LESS_EQUAL();
+      case GREAT: return operation.GREAT();
+      case GREAT_EQUAL: return operation.GREAT_EQUAL();
       default:
         throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "暂不支持" + a.getClass().getSimpleName()
                 + "和" + b.getClass().getSimpleName() + "类型的操作：" + operator);
@@ -55,10 +48,20 @@ public class BinaryExpression extends Expression {
   }
 
   protected BinaryOperation getOperation(Object a, Object b) throws ERuntime {
+    // long
     if(a instanceof Long && b instanceof Long){
-      return longBinaryOperation;
-    }else if(a instanceof BigDecimal || b instanceof BigDecimal){
-      return decimalBinaryOperation;
+      return new LongBinaryOperation(((Long) a), ((Long) b));
+    }
+    // decimal
+    else if(a instanceof BigDecimal && b instanceof BigDecimal){
+      return new BigDecimalBinaryOperation(((BigDecimal) a), ((BigDecimal) b));
+    }
+    // long & decimal
+    else if(a instanceof Long && b instanceof BigDecimal){
+      return new BigDecimalBinaryOperation(BigDecimal.valueOf((Long) a), ((BigDecimal) b));
+    }else if(a instanceof BigDecimal && b instanceof Long){
+      return new BigDecimalBinaryOperation(((BigDecimal) a), BigDecimal.valueOf((Long) b));
+    // else
     }else {
       throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, "暂不支持" + a.getClass().getSimpleName()
               + "和" + b.getClass().getSimpleName() + "类型的操作：" + operator);

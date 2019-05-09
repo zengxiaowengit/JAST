@@ -22,10 +22,12 @@ public class Program extends Node {
   public Object run(Context context) throws IException {
     try {
       context.enterScope();
+      Object ret = null;
       for (IStatement statement : body){
-        statement.run(context);
+        ret = statement.run(context);
       }
       System.out.println(JsonUtil.toPrettyJson(context));
+      return ret;
     }catch (EReturn eReturn){
       return eReturn;
     }catch (IException e1) {
@@ -36,6 +38,5 @@ public class Program extends Node {
     }finally {
       context.exitScope();
     }
-    return null;
   }
 }

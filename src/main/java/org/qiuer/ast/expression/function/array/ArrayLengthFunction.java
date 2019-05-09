@@ -16,7 +16,6 @@ import java.util.List;
  * list.push(element)
  */
 public class ArrayLengthFunction extends SystemFunction {
-  public String type = "ArrayLengthFunction";
 
   @Override
   public void compile() {
@@ -27,12 +26,10 @@ public class ArrayLengthFunction extends SystemFunction {
 
   @Override
   public Object run(Context context) throws IException {
-    if(this.params != null && this.params.size() == 1){
-      List<Object> list = EValidate.cast(this.params.get(0).run(context), List.class);
-      return list.size();
-    }else {
-      throw new ERuntime(Const.EXCEPTION.WRONG_PARAMS_ON_CALL,"调用" + this.type + "函数参数错误：" + JsonUtil.toJson(this.params));
-    }
+    EValidate.assertTrue(this.params != null && this.params.size() == 1,
+            "调用" + this.type + "函数参数错误：" + JsonUtil.toJson(this.params));
+    List<Object> list = EValidate.cast(this.params.get(0).run(context), List.class);
+    return list.size();
   }
 
   @Override

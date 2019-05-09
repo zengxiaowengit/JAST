@@ -1,12 +1,8 @@
 package org.qiuer.ast.expression.literal;
 
 import org.qiuer.core.Context;
-import org.qiuer.exception.Const;
-import org.qiuer.exception.ERuntime;
 import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
-
-import java.util.List;
 
 public class RegExpLiteral extends Literal {
   public String type = "RegExpLiteral";
@@ -24,7 +20,7 @@ public class RegExpLiteral extends Literal {
   }
 
   @Override
-  public void addMemberPath(List<String> path) throws IException {
-    throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_OPERATION, type + "不支持访问");
+  public Object getValue() {
+    return this.pattern;
   }
 }

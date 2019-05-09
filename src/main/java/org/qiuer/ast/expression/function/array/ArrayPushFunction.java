@@ -16,7 +16,6 @@ import java.util.List;
  * list.push(element)
  */
 public class ArrayPushFunction extends SystemFunction {
-  public String type = "ArrayPushFunction";
 
   @Override
   public void compile() {

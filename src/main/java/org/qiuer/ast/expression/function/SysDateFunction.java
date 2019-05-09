@@ -7,7 +7,6 @@ import org.qiuer.exception.IException;
 import java.util.Date;
 
 public class SysDateFunction extends SystemFunction{
-  public String type = "SysDateFunction";
 
   @Override
   public Class registerToOrNull() {

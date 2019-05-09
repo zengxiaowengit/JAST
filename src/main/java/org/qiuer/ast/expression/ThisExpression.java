@@ -5,7 +5,7 @@ import org.qiuer.exception.IException;
 
 import java.util.List;
 
-public class ThisExpression extends AbstractAssignPathExpression{
+public class ThisExpression extends Expression{
   String type = "ThisExpression";
 
   @Override
@@ -16,10 +16,5 @@ public class ThisExpression extends AbstractAssignPathExpression{
   @Override
   public Object run(Context context) throws IException {
     return null;
-  }
-
-  @Override
-  public void addMemberPath(List<String> path) {
-    path.add("this");
   }
 }

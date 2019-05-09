@@ -13,17 +13,30 @@ import org.qiuer.exception.IException;
 import java.util.ArrayList;
 import java.util.List;
 
+// 更新值。
 public class AssignmentExpression extends Expression{
   public String type = "AssignmentExpression";
   public String operator;
   public IPattern left;
   public IExpression right;
 
+  private AssignMode mode;
+
   @Override
   public void compile() throws IException {
     EValidate.notNull(operator);
     EValidate.notNull(left);
     EValidate.notNull(right);
+    if(left instanceof Identifier && right instanceof Function){
+      mode = new IdFunctionAssignMode((Identifier) left,(Function) right);
+    }else if(left instanceof Identifier){
+      mode = new IdVariableAssignMode((Identifier) left, right);
+    }else if(left instanceof MemberExpression && right instanceof Function){
+      mode = new MemberFunctionAssignMode((MemberExpression) left,(Function) right);
+    }else if(left instanceof MemberExpression){
+      mode = new MemberVariableAssignMode((MemberExpression) left, right);
+    }else throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION,
+            "不支持的类型声明：" + left.getClass().getSimpleName() + ": " + right.getClass().getSimpleName());
   }
 
   @Override
@@ -31,21 +44,72 @@ public class AssignmentExpression extends Expression{
     AssignmentOperator op = AssignmentOperator.parse(operator);
     switch (op){
       case EQUAL:
-        if (left instanceof AbstractAssignPathExpression){
-          AbstractAssignPathExpression assignPathExpression = (AbstractAssignPathExpression) left;
-          List<String> path = new ArrayList<>();
-          ((AbstractAssignPathExpression) left).addMemberPath(path);
-
-          if(right instanceof Function)
-            context.declareFunction(StringUtils.join(path, "."), (Function) right);
-          else
-            assignPathExpression.updateVariableValue(context, path, right.run(context));
-        }else {
-          throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION,"类型暂不支持声明：" + left);
-        }
-        break;
-      default: throw new ERuntime(Const.EXCEPTION.UNSUPPORTED_EXPRESSION,"暂未支持的声明操作符：" + operator);
+        mode.assign(context);
     }
     return null;
   }
+
+  protected abstract class AssignMode<L, R>{
+    L left;
+    R right;
+
+    AssignMode(L left, R right){
+      this.left = left;
+      this.right = right;
+    }
+
+    // 这个不是声明。是更新
+    public abstract void assign(Context context)throws IException;
+  }
+
+  class IdVariableAssignMode extends AssignMode<Identifier, IExpression>{
+
+    IdVariableAssignMode(Identifier left, IExpression right) {
+      super(left, right);
+    }
+
+    @Override
+    public void assign(Context context) throws IException {
+      context.updateVariable(left.name, right.run(context));
+    }
+  }
+
+  class IdFunctionAssignMode extends AssignMode<Identifier, Function>{
+
+    IdFunctionAssignMode(Identifier left, Function right) {
+      super(left, right);
+    }
+
+    @Override
+    public void assign(Context context) throws IException {
+      context.declareFunction(left.name, right);
+    }
+  }
+
+  class MemberVariableAssignMode extends AssignMode<MemberExpression, IExpression>{
+
+    MemberVariableAssignMode(MemberExpression left, IExpression right) {
+      super(left, right);
+    }
+
+    @Override
+    public void assign(Context context) throws IException {
+      this.left.updateVariableValue(context, this.right.run(context));
+    }
+  }
+
+  class MemberFunctionAssignMode extends AssignMode<MemberExpression, Function>{
+
+    MemberFunctionAssignMode(MemberExpression left, Function right) {
+      super(left, right);
+    }
+
+    @Override
+    public void assign(Context context) throws IException {
+      List<String> path = new ArrayList<>();
+      this.left.addMemberPath(path);
+      context.declareFunction(StringUtils.join(path, "."), this.right);
+    }
+  }
+
 }

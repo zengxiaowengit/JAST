@@ -1,13 +1,10 @@
 package org.qiuer.ast.expression;
 
-import org.qiuer.ast.expression.function.Function;
 import org.qiuer.core.Context;
 import org.qiuer.exception.EValidate;
 import org.qiuer.exception.IException;
 
-import java.util.List;
-
-public class Identifier extends AbstractAssignPathExpression{
+public class Identifier extends Expression{
   String type = "Identifier";
   public String name;
 
@@ -29,14 +26,5 @@ public class Identifier extends AbstractAssignPathExpression{
       ret = context.getFunction(name);
     }
     return ret;
-  }
-
-  @Override
-  public void addMemberPath(List<String> path) {
-    path.add(this.name);
-  }
-
-  public Function getFunction(Context context){
-    return context.getFunction(this.name);
   }
 }

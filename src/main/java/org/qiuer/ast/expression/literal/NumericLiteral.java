@@ -34,7 +34,7 @@ public class NumericLiteral extends Literal {
   }
 
   @Override
-  public void addMemberPath(List<String> path) {
-    path.add(value.toString());
+  public Object getValue() {
+    return value;
   }
 }

@@ -27,10 +27,15 @@ public class ForStatement extends Statement {
   @Override
   public Object run(Context context) throws IException {
     context.enterScope();
-    for (init.run(context); EValidate.cast(test.run(context), Boolean.class); update.run(context)){
-      body.run(context);
+    try {
+      for (init.run(context); EValidate.cast(test.run(context), Boolean.class); update.run(context)){
+        body.run(context);
+      }
+    }finally {
+      context.exitScope();
     }
-    context.exitScope();
+
+
     return null;
     /*init.run(context);
     long start = System.currentTimeMillis();

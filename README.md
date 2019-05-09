@@ -19,4 +19,4 @@ declaration和pattern、Node不应该有run方法。
 
 > 暂时禁止使用this。不好实现，容易出bug。再考虑
 
-# 性能测试对比
+> 函数的链式调用目前不支持。重写AssignPath。
