@@ -41,8 +41,8 @@ public enum BinaryOperator {
       return null;
     }
     switch (str.trim()){
-      case "==": return DOUBLE_EQUAL;// 值是否等。会转换为同类型比较。
-      case "!=": return NOT_EQUAL; // 对象是否同一个。不会转换类型。
+      case "==": return DOUBLE_EQUAL;
+      case "!=": return NOT_EQUAL;
       case "===": return TRIPLE_EQUAL;
       case "!==": return NOT_DOUBLE_EQUAL;
       case "<": return LESS;
@@ -62,63 +62,61 @@ public enum BinaryOperator {
   }
 }
 
-abstract class BinaryOperation<T>{
+// A: 操作数1类型，B，操作数2类型。R：返回值类型。
+abstract class BinaryOperation<A, B, R>{
 
-  protected T left;
-  protected T right;
+  protected A left;
+  protected B right;
 
-  BinaryOperation(T left, T right){
+  BinaryOperation(A left, B right){
     this.left = left;
     this.right = right;
   }
-  //TODO 有空再实现。
-//  public abstract boolean DOUBLE_EQUAL(Object left , Object property) throws ERuntime ;
-//  public abstract boolean NOT_EQUAL(Object left, Object property) throws ERuntime ;
-//  public abstract boolean TRIPLE_EQUAL(Object left, Object property) throws ERuntime ;
-//  public abstract boolean NOT_DOUBLE_EQUAL(Object left, Object property) throws ERuntime ;
+  // ==: 值是否相等。toString, equals
+  public abstract boolean DOUBLE_EQUAL() throws ERuntime ;
+  public abstract boolean NOT_EQUAL() throws ERuntime ;
+  // ===: 类型和值都必需相等。equals
+  public abstract boolean TRIPLE_EQUAL() throws ERuntime ;
+  public abstract boolean NOT_DOUBLE_EQUAL() throws ERuntime ;
   public abstract boolean LESS() throws ERuntime;
   public abstract boolean LESS_EQUAL() throws ERuntime ;
   public abstract boolean GREAT() throws ERuntime ;
   public abstract boolean GREAT_EQUAL() throws ERuntime ;
-  public abstract T PLUS() throws ERuntime;
-  public abstract T MINUS() throws ERuntime;
-  public abstract T MULTIPLY() throws ERuntime;
-  public abstract T DIVIDE() throws ERuntime;
-  public abstract T MOD() throws ERuntime;
-//  public abstract void LEFT_SHIFT(Object left, Object property) throws ERuntime ;
-
-//  public abstract void RIGHT_SHIFT(Object left, Object property) throws ERuntime ;
+  public abstract R PLUS() throws ERuntime;
+  public abstract R MINUS() throws ERuntime;
+  public abstract R MULTIPLY() throws ERuntime;
+  public abstract R DIVIDE() throws ERuntime;
+  public abstract R MOD() throws ERuntime;
+//  public abstract void LEFT_SHIFT() throws ERuntime ;
+//  public abstract void RIGHT_SHIFT() throws ERuntime ;
 
   protected static final int DIVIDE_SCALE = 10;
-
-/*
-  protected BigDecimal toBigDecimal(Object object) throws ERuntime {
-    if(object instanceof BigDecimal){
-      return (BigDecimal) object;
-    }
-    try {
-      return new BigDecimal(String.valueOf(object));
-    }catch (Exception e){
-      throw new ERuntime(Const.EXCEPTION.TYPE_CAST_ERROR, object.getClass().getSimpleName() + "类型不能转换为数值类型");
-    }
-  }
-
-  protected Long toLong(Object object) throws ERuntime {
-    if(object instanceof Long){
-      return (Long) object;
-    }
-    try {
-      return new Long(String.valueOf(object));
-    }catch (Exception e){
-      throw new ERuntime(Const.EXCEPTION.TYPE_CAST_ERROR, object.getClass().getSimpleName() + "类型不能转换为Long类型");
-    }
-  }*/
 }
 
-class LongBinaryOperation extends BinaryOperation<Long>{
+class LongBinaryOperation extends BinaryOperation<Long, Long, Long>{
 
   LongBinaryOperation(Long left, Long right) {
     super(left, right);
+  }
+
+  @Override
+  public boolean DOUBLE_EQUAL() throws ERuntime {
+    return this.left.equals(this.right);
+  }
+
+  @Override
+  public boolean NOT_EQUAL() throws ERuntime {
+    return !(this.left.equals(this.right));
+  }
+
+  @Override
+  public boolean TRIPLE_EQUAL() throws ERuntime {
+    return this.left.equals(this.right);
+  }
+
+  @Override
+  public boolean NOT_DOUBLE_EQUAL() throws ERuntime {
+    return !(this.left.equals(this.right));
   }
 
   @Override
@@ -168,10 +166,30 @@ class LongBinaryOperation extends BinaryOperation<Long>{
 
 }
 
-class BigDecimalBinaryOperation extends BinaryOperation<BigDecimal>{
+class BigDecimalBinaryOperation extends BinaryOperation<BigDecimal, BigDecimal, BigDecimal>{
 
   BigDecimalBinaryOperation(BigDecimal left, BigDecimal right) {
     super(left, right);
+  }
+
+  @Override
+  public boolean DOUBLE_EQUAL() throws ERuntime {
+    return this.left.equals(this.right);
+  }
+
+  @Override
+  public boolean NOT_EQUAL() throws ERuntime {
+    return !this.left.equals(this.right);
+  }
+
+  @Override
+  public boolean TRIPLE_EQUAL() throws ERuntime {
+    return this.left.equals(this.right);
+  }
+
+  @Override
+  public boolean NOT_DOUBLE_EQUAL() throws ERuntime {
+    return !this.left.equals(this.right);
   }
 
   private BigDecimal divideDecimal(BigDecimal a, BigDecimal b){
