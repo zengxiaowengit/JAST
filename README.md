@@ -53,6 +53,19 @@ AST的主要结构
 | 6.获取时间函数调用100万次  |225-328ms      |304-366ms      |10ms       |
 | 7.加减乘除100万次          |548-561ms      |1544ms         |           |
 
+##### 运行代码示例：简单的斐波那契数列
+
+```ecmascript 6
+function Fib (n) {
+  if ( n <= 1 ) {
+    return 1;
+  }
+  return Fib(n - 1) + Fib(n - 2);
+}
+
+let result = Fib(25);
+
+```
 
 #### 安装教程
 
