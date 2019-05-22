@@ -5,6 +5,7 @@
 jast是一个类似于java中的 NashornScript Engine的脚本执行引擎。语法定义遵循es6规范。
 
 在java中运行JavaScript、ECMA Script 6。 多么酷的一件事情！
+搭配spring boot，可以实现快速后端开发，修改代码无需打包发布，实时上线。
 前端也能无缝接入开发后端，享受java的集群和扩容的能力！
 运行速度爆表，使用JIT技术，预编译技术优化性能，追求极致！
 前后端统一语言，降低开发入门门槛，我们在路上！
