@@ -1,8 +1,10 @@
 
-# es6-in-java
+# jast
 
 #### 介绍
-在java中运行ECMA Script 6。 多么酷的一件事情！
+jast是一个类似于java中的 NashornScript Engine的脚本执行引擎。语法定义遵循es6规范。
+
+在java中运行JavaScript、ECMA Script 6。 多么酷的一件事情！
 前端也能无缝接入开发后端，享受java的集群和扩容的能力！
 运行速度爆表，使用JIT技术，预编译技术优化性能，追求极致！
 前后端统一语言，降低开发入门门槛，我们在路上！
@@ -13,8 +15,7 @@ java如何运行JavaScript？我们有以下几种方法：
 - java 自带的NashornScript Engine。不支持ES6，支持旧版。速度慢。
 - google的aviator表达式引擎。自己基于表达式引擎去实现。不支持js语法，开发难度大。
 
-###### es6-in-java
-
+###### jast
 
 ###### 为什么不是Django？不是Node.js？
 选用java，看重的是java的社区环境和良好的横向扩展性，集群能力，以及强大的库环境。比如spring社区。
@@ -43,7 +44,7 @@ AST的主要结构
 
 
 #### es-in-java和aviator性能测试对比
-| 对比项目                  |es6-in-java    |aviator        |java       |    说明
+| 对比项目                  |jast           |aviator        |java       |    说明
 | ------                    |------        |------          |------     |-----
 | 1.array一百万次push       |408ms          |448ms          |52ms       |
 | 2.map 一百万次put         |268ms          |386ms          |20ms       |
@@ -86,6 +87,12 @@ let result = Fib(25);
 3. 提交代码
 4. 新建 Pull Request
 
+#### 支持
+
+任何企业和个人都可以免费使用，并能免费得到社区，论坛，QQ群和作者的免费技术支持。以下情况需要收费技术支持，详情可联系微信（xiaoxiaowenweixin），备注“商业技术支持”
+
+任何公开申明了996工作制度得企业，将收取9996元/年 的费用
+想获得商业技术支持，如培训，技术咨询，定制，售后等，可根据公司规模收取1000-10000元 年费
 
 #### 码云特技
 
